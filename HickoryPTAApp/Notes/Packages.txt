@@ -1,0 +1,3 @@
+﻿Installed MVC Scaffolding following the initial create of the project and 
+running in Admin. Tried it other ways and reinstalling but no luck.
+Install-Package MvcScaffolding -Version 1.0.8-vs2013 -Pre

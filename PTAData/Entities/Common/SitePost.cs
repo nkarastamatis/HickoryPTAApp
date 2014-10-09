@@ -1,0 +1,27 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
+
+namespace PTAData.Entities
+{
+    public class SitePost : IAutoGenerateFields
+    {
+        [Key]
+        [Column(Order=1)]
+        public string PostId { get; set; }
+        public string PostTitle { get; set; }
+        public string PostBody { get; set; }
+
+        public virtual ICollection<PostFile> Files { get; set; }
+
+        public DateTime LastModified { get; set; }
+
+        public DateTime CreatedOn { get; set; }
+
+        public string UserModified { get; set; }
+    }
+}

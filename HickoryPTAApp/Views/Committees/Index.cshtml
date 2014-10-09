@@ -1,0 +1,59 @@
+@model IEnumerable<PTAData.Entities.Committee>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            CommitteeName
+        </th>
+        <th>
+            Description
+        </th>
+        <th>
+            ChairPersons
+        </th>
+        <th>
+            AttachedFiles
+        </th>
+        <th>
+            Entries
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.CommitteeId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.CommitteeId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.CommitteeId })
+        </td>
+        <td>
+			@item.CommitteeName
+        </td>
+        <td>
+			@item.Description
+        </td>
+        <td>
+			@(item.ChairPersons == null ? "None" : item.ChairPersons.Count.ToString())
+        </td>
+        <td>
+			@(item.AttachedFiles == null ? "None" : item.AttachedFiles.Count.ToString())
+        </td>
+        <td>
+			@(item.Entries == null ? "None" : item.Entries.Count.ToString())
+        </td>
+    </tr>
+}
+
+</table>
+
+
