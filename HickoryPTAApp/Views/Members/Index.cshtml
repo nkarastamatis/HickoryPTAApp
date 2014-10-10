@@ -1,0 +1,53 @@
+@model IEnumerable<PTAData.Entities.Member>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Name
+        </th>
+        <th>
+            Phone
+        </th>
+        <th>
+            Email
+        </th>
+        <th>
+            Membership
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.MemberId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.MemberId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.MemberId })
+        </td>
+        <td>
+			@Html.DisplayTextFor(_ => item.Name).ToString()
+        </td>
+        <td>
+			@item.Phone
+        </td>
+        <td>
+			@item.Email
+        </td>
+        <td>
+			@Html.DisplayTextFor(_ => item.Membership).ToString()
+        </td>
+    </tr>
+}
+
+</table>
+
+

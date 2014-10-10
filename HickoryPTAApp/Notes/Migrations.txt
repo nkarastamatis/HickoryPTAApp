@@ -1,3 +1,6 @@
 ﻿Example of enable and add in a multi context dll
 Enable-Migrations -ProjectName PTAData -ContextTypeName PTAData.Entities.CommitteeContext -MigrationsDirectory Migrations\CommitteeContextMigrations
 Add-Migration Initial -ConfigurationTypeName PTAData.Migrations.CommitteeContextMigrations.Configuration -ProjectName PTAData
+
+
+Add-Migration AddMemberId -ConfigurationTypeName HickoryPTAApp.Migrations.ApplicationDbContextMigrations.Configuration -ProjectName HickoryPTAApp

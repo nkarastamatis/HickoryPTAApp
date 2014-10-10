@@ -1,4 +1,4 @@
-@model PTAData.Entities.Committee
+@model PTAData.Entities.Member
 
 @{
     ViewBag.Title = "Edit";
@@ -9,9 +9,9 @@
 @using (Html.BeginForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
-        <legend>Committee</legend>
+        <legend>Member</legend>
 
-        @Html.HiddenFor(model => model.CommitteeId)
+        @Html.HiddenFor(model => model.MemberId)
 		@Html.Partial("_CreateOrEdit", Model)
 
         <p>

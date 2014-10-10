@@ -1,0 +1,29 @@
+@model PTAData.Entities.Membership
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Membership</legend>
+
+    <div class="display-label">Type</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Type).ToString()</div>
+
+    <div class="display-label">Address</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Address).ToString()</div>
+
+    <div class="display-label">Members</div>
+    <div class="display-field">@(Model.Members == null ? "None" : Model.Members.Count.ToString())</div>
+
+    <div class="display-label">Students</div>
+    <div class="display-field">@(Model.Students == null ? "None" : Model.Students.Count.ToString())</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.MembershipId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

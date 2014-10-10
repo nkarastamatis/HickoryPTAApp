@@ -1,19 +1,19 @@
-namespace PTAData.Migrations.CommitteeContextMigrations
+namespace PTAData.Migrations.PTADataContextMigrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<PTAData.Entities.CommitteeContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<PTAData.Entities.PTADataContext>
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
-            MigrationsDirectory = @"Migrations\CommitteeContextMigrations";
+            AutomaticMigrationsEnabled = true;
+            MigrationsDirectory = @"Migrations\PTADataContextMigrations";
         }
 
-        protected override void Seed(PTAData.Entities.CommitteeContext context)
+        protected override void Seed(PTAData.Entities.PTADataContext context)
         {
             //  This method will be called after migrating to the latest version.
 

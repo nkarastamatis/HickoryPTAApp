@@ -1,9 +1,9 @@
-namespace PTAData.Migrations.ApplicationUserContextMigrations
+namespace HickoryPTAApp.Migrations.ApplicationDbContextMigrations
 {
     using System;
     using System.Data.Entity.Migrations;
     
-    public partial class Initial : DbMigration
+    public partial class InitialCreate : DbMigration
     {
         public override void Up()
         {

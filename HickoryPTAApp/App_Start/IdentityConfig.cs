@@ -35,7 +35,7 @@ namespace HickoryPTAApp
                                 "nkaras2@gmail.com", "NKaras Admin");
             myMessage.Subject = message.Subject;
             myMessage.Text = message.Body;
-            myMessage.Html = message.Body;
+            myMessage.Html = message.Body + "<br/><br/>";
 
             var credentials = new NetworkCredential(
                        "email@gmail.com",//ConfigurationManager.AppSettings["mailAccount"],
@@ -59,8 +59,8 @@ namespace HickoryPTAApp
         void sendMail(IdentityMessage message)
         {
             #region formatter
-            string text = string.Format("Please click on this link to {0}: {1}", message.Subject, message.Body);
-            string html = "Please confirm your account by clicking this link: <a href=\"" + message.Body + "\">link</a><br/>";
+            string text = message.Body;
+            string html = message.Body + "<br/><br/>";
 
             html += HttpUtility.HtmlEncode(@"Or click on the copy the following link on the browser:" + message.Body);
             #endregion
@@ -79,7 +79,7 @@ namespace HickoryPTAApp
                 EnableSsl = true,
                 DeliveryMethod = SmtpDeliveryMethod.Network,
                 UseDefaultCredentials = false,
-                Credentials = new System.Net.NetworkCredential("nkarastamatis@gmail.com", "xxxxxx")
+                Credentials = new System.Net.NetworkCredential("nkarastamatis@gmail.com", "xxxxx")
             };
 
             smtpClient.Send(msg);

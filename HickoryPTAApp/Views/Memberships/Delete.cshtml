@@ -1,0 +1,32 @@
+@model PTAData.Entities.Membership
+
+@{
+    ViewBag.Title = "Delete";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<fieldset>
+    <legend>Membership</legend>
+
+    <div class="display-label">Type</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Type).ToString()</div>
+
+    <div class="display-label">Address</div>
+    <div class="display-field">@Html.DisplayTextFor(_ => Model.Address).ToString()</div>
+
+    <div class="display-label">Members</div>
+    <div class="display-field">@(Model.Members == null ? "None" : Model.Members.Count.ToString())</div>
+
+    <div class="display-label">Students</div>
+    <div class="display-field">@(Model.Students == null ? "None" : Model.Students.Count.ToString())</div>
+</fieldset>
+@using (Html.BeginForm()) {
+    <p>
+        <input type="submit" value="Delete" /> |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+}
+
+

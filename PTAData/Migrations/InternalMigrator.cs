@@ -11,12 +11,12 @@ namespace PTAData.Migrations
     {
         public static void Update()
         {
-            var membershipContextConfiguration = new PTAData.Migrations.MembershipContextMigrations.Configuration();
-            var migrator = new DbMigrator(membershipContextConfiguration);
-            migrator.Update();
+            //var membershipContextConfiguration = new PTAData.Migrations.MembershipContextMigrations.Configuration();
+            //var migrator = new DbMigrator(membershipContextConfiguration);
+            //migrator.Update();
 
-            var applicationUserConfiguration = new PTAData.Migrations.ApplicationUserContextMigrations.Configuration();
-            migrator = new DbMigrator(applicationUserConfiguration);
+            //var applicationUserConfiguration = new PTAData.Migrations.ApplicationUserContextMigrations.Configuration();
+            //migrator = new DbMigrator(applicationUserConfiguration);
             //migrator.Update();
 
             //var committeeContextConfiguration = new PTAData.Migrations.CommitteeContextMigrations.Configuration();

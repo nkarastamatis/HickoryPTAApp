@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PTAData.Repositories
 {
-    public class CommitteeRepository : BaseRepository<CommitteeContext>
+    public class CommitteeRepository : BaseRepository<PTADataContext>
     {       
         public List<Committee> Committees
         {

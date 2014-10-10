@@ -7,9 +7,9 @@ using System.Data.Entity;
 
 namespace PTAData.Entities
 {
-    public class CommitteeContext : DbContext
+    public class PTADataContext : DbContext
     {
-        public CommitteeContext()
+        public PTADataContext()
             : base("DefaultConnection")
         {
         }
@@ -17,5 +17,10 @@ namespace PTAData.Entities
         public DbSet<Committee> Committees { get; set; }
         public DbSet<CommitteeFile> CommitteeFiles { get; set; }
         public DbSet<CommitteePost> CommitteeEntries { get; set; }
+
+        public DbSet<Membership> Memberships { get; set; }
+        public DbSet<Member> Members { get; set; }
+        public DbSet<Student> Students { get; set; }
+        public DbSet<Teacher> Teachers { get; set; }
     }
 }

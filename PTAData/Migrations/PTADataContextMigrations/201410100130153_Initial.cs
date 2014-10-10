@@ -1,4 +1,4 @@
-namespace PTAData.Migrations.CommitteeContextMigrations
+namespace PTAData.Migrations.PTADataContextMigrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -8,23 +8,25 @@ namespace PTAData.Migrations.CommitteeContextMigrations
         public override void Up()
         {
             CreateTable(
-                "dbo.CommitteeEntries",
+                "dbo.CommitteePosts",
                 c => new
                     {
-                        EntryId = c.String(nullable: false, maxLength: 128),
-                        CommitteeId = c.String(maxLength: 128),
-                        EntryTitle = c.String(),
-                        EntryBody = c.String(),
+                        PostId = c.String(nullable: false, maxLength: 128),
+                        CommitteeId = c.String(nullable: false, maxLength: 128),
+                        PostTitle = c.String(),
+                        PostBody = c.String(),
                         LastModified = c.DateTime(nullable: false),
                         CreatedOn = c.DateTime(nullable: false),
                         UserModified = c.String(),
+                        EventDate = c.DateTime(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
-                .PrimaryKey(t => t.EntryId)
-                .ForeignKey("dbo.Committees", t => t.CommitteeId)
+                .PrimaryKey(t => new { t.PostId, t.CommitteeId })
+                .ForeignKey("dbo.Committees", t => t.CommitteeId, cascadeDelete: true)
                 .Index(t => t.CommitteeId);
             
             CreateTable(
-                "dbo.EntryFiles",
+                "dbo.PostFiles",
                 c => new
                     {
                         FileId = c.String(nullable: false, maxLength: 128),
@@ -34,10 +36,12 @@ namespace PTAData.Migrations.CommitteeContextMigrations
                         LastModified = c.DateTime(nullable: false),
                         CreatedOn = c.DateTime(nullable: false),
                         UserModified = c.String(),
+                        CommitteePost_PostId = c.String(maxLength: 128),
+                        CommitteePost_CommitteeId = c.String(maxLength: 128),
                     })
                 .PrimaryKey(t => new { t.FileId, t.EntryId })
-                .ForeignKey("dbo.CommitteeEntries", t => t.EntryId, cascadeDelete: true)
-                .Index(t => t.EntryId);
+                .ForeignKey("dbo.CommitteePosts", t => new { t.CommitteePost_PostId, t.CommitteePost_CommitteeId })
+                .Index(t => new { t.CommitteePost_PostId, t.CommitteePost_CommitteeId });
             
             CreateTable(
                 "dbo.CommitteeFiles",
@@ -140,22 +144,22 @@ namespace PTAData.Migrations.CommitteeContextMigrations
         
         public override void Down()
         {
-            DropForeignKey("dbo.CommitteeEntries", "CommitteeId", "dbo.Committees");
+            DropForeignKey("dbo.CommitteePosts", "CommitteeId", "dbo.Committees");
             DropForeignKey("dbo.ChairPersons", "MemberId", "dbo.Members");
             DropForeignKey("dbo.Students", "TeacherId", "dbo.Teachers");
             DropForeignKey("dbo.Students", "StudentId", "dbo.Memberships");
             DropForeignKey("dbo.Members", "MembershipId", "dbo.Memberships");
             DropForeignKey("dbo.ChairPersons", "CommitteeId", "dbo.Committees");
             DropForeignKey("dbo.CommitteeFiles", "CommitteeId", "dbo.Committees");
-            DropForeignKey("dbo.EntryFiles", "EntryId", "dbo.CommitteeEntries");
+            DropForeignKey("dbo.PostFiles", new[] { "CommitteePost_PostId", "CommitteePost_CommitteeId" }, "dbo.CommitteePosts");
             DropIndex("dbo.Students", new[] { "TeacherId" });
             DropIndex("dbo.Students", new[] { "StudentId" });
             DropIndex("dbo.Members", new[] { "MembershipId" });
             DropIndex("dbo.ChairPersons", new[] { "MemberId" });
             DropIndex("dbo.ChairPersons", new[] { "CommitteeId" });
             DropIndex("dbo.CommitteeFiles", new[] { "CommitteeId" });
-            DropIndex("dbo.EntryFiles", new[] { "EntryId" });
-            DropIndex("dbo.CommitteeEntries", new[] { "CommitteeId" });
+            DropIndex("dbo.PostFiles", new[] { "CommitteePost_PostId", "CommitteePost_CommitteeId" });
+            DropIndex("dbo.CommitteePosts", new[] { "CommitteeId" });
             DropTable("dbo.Teachers");
             DropTable("dbo.Students");
             DropTable("dbo.Memberships");
@@ -163,8 +167,8 @@ namespace PTAData.Migrations.CommitteeContextMigrations
             DropTable("dbo.ChairPersons");
             DropTable("dbo.Committees");
             DropTable("dbo.CommitteeFiles");
-            DropTable("dbo.EntryFiles");
-            DropTable("dbo.CommitteeEntries");
+            DropTable("dbo.PostFiles");
+            DropTable("dbo.CommitteePosts");
         }
     }
 }

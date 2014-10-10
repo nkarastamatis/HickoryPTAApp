@@ -3,6 +3,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
+using PTAData.Entities;
 
 namespace HickoryPTAApp.Models
 {
@@ -16,6 +17,9 @@ namespace HickoryPTAApp.Models
             // Add custom user claims here
             return userIdentity;
         }
+
+        public string MemberId { get; set; }
+        public virtual Member Member { get; set; }
     }
 
     public class ApplicationDbContext : IdentityDbContext<ApplicationUser>

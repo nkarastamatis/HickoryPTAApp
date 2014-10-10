@@ -8,7 +8,7 @@ using PTAData.Entities;
 
 namespace PTAData.Repositories
 {
-    public class MembershipRepository : BaseRepository<MembershipContext>
+    public class MembershipRepository : BaseRepository<PTADataContext>
     {
 
         public IList<Member> Members

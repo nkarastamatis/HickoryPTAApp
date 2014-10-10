@@ -1,19 +1,20 @@
-namespace PTAData.Migrations.MembershipContextMigrations
+namespace HickoryPTAApp.Migrations.ApplicationDbContextMigrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    public sealed class Configuration : DbMigrationsConfiguration<PTAData.Entities.MembershipContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<HickoryPTAApp.Models.ApplicationDbContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            MigrationsDirectory = @"Migrations\MembershipContextMigrations";
+            MigrationsDirectory = @"Migrations\ApplicationDbContextMigrations";
+            ContextKey = "HickoryPTAApp.Models.ApplicationDbContext";
         }
 
-        protected override void Seed(PTAData.Entities.MembershipContext context)
+        protected override void Seed(HickoryPTAApp.Models.ApplicationDbContext context)
         {
             //  This method will be called after migrating to the latest version.
 

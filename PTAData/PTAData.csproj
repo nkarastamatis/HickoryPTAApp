@@ -67,7 +67,7 @@
   <ItemGroup>
     <Compile Include="Entities\Committee\ChairPerson.cs" />
     <Compile Include="Entities\Committee\Committee.cs" />
-    <Compile Include="Entities\Committee\CommitteeContext.cs" />
+    <Compile Include="Entities\PTADataContext.cs" />
     <Compile Include="Entities\Committee\CommitteePost.cs" />
     <Compile Include="Entities\Committee\CommitteeEvent.cs" />
     <Compile Include="Entities\Committee\CommitteeFiles.cs" />
@@ -84,22 +84,12 @@
     <Compile Include="Entities\School\Grade.cs" />
     <Compile Include="Entities\School\Teacher.cs" />
     <Compile Include="Entities\User\IdentityModels.cs" />
-    <Compile Include="Migrations\ApplicationUserContextMigrations\201409271805156_Initial.cs" />
-    <Compile Include="Migrations\ApplicationUserContextMigrations\201409271805156_Initial.Designer.cs">
-      <DependentUpon>201409271805156_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ApplicationUserContextMigrations\Configuration.cs" />
-    <Compile Include="Migrations\CommitteeContextMigrations\Configuration.cs" />
     <Compile Include="Migrations\InternalMigrator.cs" />
-    <Compile Include="Migrations\MembershipContextMigrations\201409271726381_Initial.cs" />
-    <Compile Include="Migrations\MembershipContextMigrations\201409271726381_Initial.Designer.cs">
-      <DependentUpon>201409271726381_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\PTADataContextMigrations\201410100130153_Initial.cs" />
+    <Compile Include="Migrations\PTADataContextMigrations\201410100130153_Initial.Designer.cs">
+      <DependentUpon>201410100130153_Initial.cs</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\MembershipContextMigrations\201409271737508_AddMembershipType.cs" />
-    <Compile Include="Migrations\MembershipContextMigrations\201409271737508_AddMembershipType.Designer.cs">
-      <DependentUpon>201409271737508_AddMembershipType.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\MembershipContextMigrations\Configuration.cs" />
+    <Compile Include="Migrations\PTADataContextMigrations\Configuration.cs" />
     <Compile Include="NVPAPICaller.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repositories\BaseRepository.cs" />
@@ -112,14 +102,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ApplicationUserContextMigrations\201409271805156_Initial.resx">
-      <DependentUpon>201409271805156_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\MembershipContextMigrations\201409271726381_Initial.resx">
-      <DependentUpon>201409271726381_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\MembershipContextMigrations\201409271737508_AddMembershipType.resx">
-      <DependentUpon>201409271737508_AddMembershipType.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\PTADataContextMigrations\201410100130153_Initial.resx">
+      <DependentUpon>201410100130153_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

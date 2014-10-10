@@ -41,16 +41,16 @@ namespace PTAData.Entities
         }
     }
 
-    public class MembershipContext : DbContext
-    {
-        public MembershipContext()
-            : base("DefaultConnection")
-        { 
-        }
+    //public class MembershipContext : DbContext
+    //{
+    //    public MembershipContext()
+    //        : base("DefaultConnection")
+    //    { 
+    //    }
 
-        public DbSet<Membership> Memberships { get; set; }
-        public DbSet<Member> Members { get; set; }
-        public DbSet<Student> Students { get; set; }
-        public DbSet<Teacher> Teachers { get; set; }
-    }
+    //    public DbSet<Membership> Memberships { get; set; }
+    //    public DbSet<Member> Members { get; set; }
+    //    public DbSet<Student> Students { get; set; }
+    //    public DbSet<Teacher> Teachers { get; set; }
+    //}
 }
