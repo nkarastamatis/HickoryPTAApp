@@ -82,7 +82,14 @@ namespace HickoryPTAApp
                 Credentials = new System.Net.NetworkCredential("nkarastamatis@gmail.com", "xxxxx")
             };
 
-            smtpClient.Send(msg);
+            try
+            {
+                smtpClient.Send(msg);
+            }
+            catch (Exception ex)
+            {
+                int i = 0;
+            }
         }
     }
 

@@ -14,16 +14,16 @@ namespace PTAData.Entities
     [Serializable]
     public class Member
     {
-        public string MemberId { get; set; }
+        public int MemberId { get; set; }
         public PersonName Name { get; set; }
         public string Phone { get; set; }
         public string Email { get; set; }
 
         [Required]
-        public string MembershipId { get; set; }
+        public int MembershipId { get; set; }
 
-        [ForeignKey("MembershipId")]
-        public Membership Membership { get; set; }
+        //[ForeignKey("MembershipId")]
+        public virtual Membership Membership { get; set; }
 
         public Member()
         {
@@ -35,8 +35,6 @@ namespace PTAData.Entities
 
         private void Initialize()
         {
-            MemberId = Guid.NewGuid().ToString();
-            Name = new PersonName();
         }
     }
 }

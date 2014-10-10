@@ -1,4 +1,4 @@
-namespace PTAData.Migrations.PTADataContextMigrations
+namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
 {
     using System;
     using System.Data.Entity.Migrations;
@@ -11,8 +11,8 @@ namespace PTAData.Migrations.PTADataContextMigrations
                 "dbo.CommitteePosts",
                 c => new
                     {
-                        PostId = c.String(nullable: false, maxLength: 128),
-                        CommitteeId = c.String(nullable: false, maxLength: 128),
+                        PostId = c.Int(nullable: false),
+                        CommitteeId = c.Int(nullable: false),
                         PostTitle = c.String(),
                         PostBody = c.String(),
                         LastModified = c.DateTime(nullable: false),
@@ -29,15 +29,15 @@ namespace PTAData.Migrations.PTADataContextMigrations
                 "dbo.PostFiles",
                 c => new
                     {
-                        FileId = c.String(nullable: false, maxLength: 128),
-                        EntryId = c.String(nullable: false, maxLength: 128),
+                        FileId = c.Int(nullable: false),
+                        EntryId = c.Int(nullable: false),
                         FileName = c.String(),
                         Path = c.String(),
                         LastModified = c.DateTime(nullable: false),
                         CreatedOn = c.DateTime(nullable: false),
                         UserModified = c.String(),
-                        CommitteePost_PostId = c.String(maxLength: 128),
-                        CommitteePost_CommitteeId = c.String(maxLength: 128),
+                        CommitteePost_PostId = c.Int(),
+                        CommitteePost_CommitteeId = c.Int(),
                     })
                 .PrimaryKey(t => new { t.FileId, t.EntryId })
                 .ForeignKey("dbo.CommitteePosts", t => new { t.CommitteePost_PostId, t.CommitteePost_CommitteeId })
@@ -47,8 +47,8 @@ namespace PTAData.Migrations.PTADataContextMigrations
                 "dbo.CommitteeFiles",
                 c => new
                     {
-                        FileId = c.String(nullable: false, maxLength: 128),
-                        CommitteeId = c.String(nullable: false, maxLength: 128),
+                        FileId = c.Int(nullable: false),
+                        CommitteeId = c.Int(nullable: false),
                         FileName = c.String(),
                         Path = c.String(),
                         LastModified = c.DateTime(nullable: false),
@@ -63,7 +63,7 @@ namespace PTAData.Migrations.PTADataContextMigrations
                 "dbo.Committees",
                 c => new
                     {
-                        CommitteeId = c.String(nullable: false, maxLength: 128),
+                        CommitteeId = c.Int(nullable: false, identity: true),
                         CommitteeName = c.String(),
                         Description = c.String(),
                         LastModified = c.DateTime(nullable: false),
@@ -76,8 +76,8 @@ namespace PTAData.Migrations.PTADataContextMigrations
                 "dbo.ChairPersons",
                 c => new
                     {
-                        CommitteeId = c.String(nullable: false, maxLength: 128),
-                        MemberId = c.String(nullable: false, maxLength: 128),
+                        CommitteeId = c.Int(nullable: false),
+                        MemberId = c.Int(nullable: false),
                     })
                 .PrimaryKey(t => new { t.CommitteeId, t.MemberId })
                 .ForeignKey("dbo.Committees", t => t.CommitteeId, cascadeDelete: true)
@@ -89,22 +89,23 @@ namespace PTAData.Migrations.PTADataContextMigrations
                 "dbo.Members",
                 c => new
                     {
-                        MemberId = c.String(nullable: false, maxLength: 128),
+                        MemberId = c.Int(nullable: false, identity: true),
                         Name_First = c.String(),
                         Name_Last = c.String(),
                         Phone = c.String(),
                         Email = c.String(),
-                        MembershipId = c.String(nullable: false, maxLength: 128),
+                        MembershipId = c.String(nullable: false),
+                        Membership_MembershipId = c.Int(),
                     })
                 .PrimaryKey(t => t.MemberId)
-                .ForeignKey("dbo.Memberships", t => t.MembershipId, cascadeDelete: true)
-                .Index(t => t.MembershipId);
+                .ForeignKey("dbo.Memberships", t => t.Membership_MembershipId)
+                .Index(t => t.Membership_MembershipId);
             
             CreateTable(
                 "dbo.Memberships",
                 c => new
                     {
-                        MembershipId = c.String(nullable: false, maxLength: 128),
+                        MembershipId = c.Int(nullable: false, identity: true),
                         Type = c.Int(nullable: false),
                         Address_StreetAddress = c.String(),
                         Address_City = c.String(),
@@ -117,23 +118,25 @@ namespace PTAData.Migrations.PTADataContextMigrations
                 "dbo.Students",
                 c => new
                     {
-                        StudentId = c.String(nullable: false, maxLength: 128),
+                        StudentId = c.Int(nullable: false, identity: true),
                         Name_First = c.String(),
                         Name_Last = c.String(),
                         MembershipId = c.String(nullable: false),
-                        TeacherId = c.String(nullable: false, maxLength: 128),
+                        TeacherId = c.String(nullable: false),
+                        Membership_MembershipId = c.Int(),
+                        Teacher_TeacherId = c.Int(),
                     })
                 .PrimaryKey(t => t.StudentId)
-                .ForeignKey("dbo.Memberships", t => t.StudentId)
-                .ForeignKey("dbo.Teachers", t => t.TeacherId, cascadeDelete: true)
-                .Index(t => t.StudentId)
-                .Index(t => t.TeacherId);
+                .ForeignKey("dbo.Memberships", t => t.Membership_MembershipId)
+                .ForeignKey("dbo.Teachers", t => t.Teacher_TeacherId)
+                .Index(t => t.Membership_MembershipId)
+                .Index(t => t.Teacher_TeacherId);
             
             CreateTable(
                 "dbo.Teachers",
                 c => new
                     {
-                        TeacherId = c.String(nullable: false, maxLength: 128),
+                        TeacherId = c.Int(nullable: false, identity: true),
                         Name_First = c.String(),
                         Name_Last = c.String(),
                         Grade = c.Int(nullable: false),
@@ -146,15 +149,15 @@ namespace PTAData.Migrations.PTADataContextMigrations
         {
             DropForeignKey("dbo.CommitteePosts", "CommitteeId", "dbo.Committees");
             DropForeignKey("dbo.ChairPersons", "MemberId", "dbo.Members");
-            DropForeignKey("dbo.Students", "TeacherId", "dbo.Teachers");
-            DropForeignKey("dbo.Students", "StudentId", "dbo.Memberships");
-            DropForeignKey("dbo.Members", "MembershipId", "dbo.Memberships");
+            DropForeignKey("dbo.Students", "Teacher_TeacherId", "dbo.Teachers");
+            DropForeignKey("dbo.Students", "Membership_MembershipId", "dbo.Memberships");
+            DropForeignKey("dbo.Members", "Membership_MembershipId", "dbo.Memberships");
             DropForeignKey("dbo.ChairPersons", "CommitteeId", "dbo.Committees");
             DropForeignKey("dbo.CommitteeFiles", "CommitteeId", "dbo.Committees");
             DropForeignKey("dbo.PostFiles", new[] { "CommitteePost_PostId", "CommitteePost_CommitteeId" }, "dbo.CommitteePosts");
-            DropIndex("dbo.Students", new[] { "TeacherId" });
-            DropIndex("dbo.Students", new[] { "StudentId" });
-            DropIndex("dbo.Members", new[] { "MembershipId" });
+            DropIndex("dbo.Students", new[] { "Teacher_TeacherId" });
+            DropIndex("dbo.Students", new[] { "Membership_MembershipId" });
+            DropIndex("dbo.Members", new[] { "Membership_MembershipId" });
             DropIndex("dbo.ChairPersons", new[] { "MemberId" });
             DropIndex("dbo.ChairPersons", new[] { "CommitteeId" });
             DropIndex("dbo.CommitteeFiles", new[] { "CommitteeId" });

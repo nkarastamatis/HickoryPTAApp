@@ -13,10 +13,10 @@ namespace PTAData.Entities
     {
         [Key]
         [Column(Order=1)]
-        public string CommitteeId { get; set; }
+        public int CommitteeId { get; set; }
         [Key]
         [Column(Order = 2)]
-        public string MemberId { get; set; }
+        public int MemberId { get; set; }
 
         //[ForeignKey("MemberId")]
         public virtual Member Member { get; set; }

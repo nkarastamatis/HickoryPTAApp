@@ -20,24 +20,24 @@ namespace PTAData.Entities
             Corporate
         }
 
-        public string MembershipId { get; set; }
+        public int MembershipId { get; set; }
         public MembershipType Type { get; set; }
         public Address Address { get; set; }
 
-        [ForeignKey("MemberId")]
-        public ICollection<Member> Members { get; set; }
+        //[ForeignKey("MemberId")]
+        public virtual ICollection<Member> Members { get; set; }
         
-        [ForeignKey("StudentId")]
-        public ICollection<Student> Students { get; set; }
+        //[ForeignKey("StudentId")]
+        public virtual ICollection<Student> Students { get; set; }
         
 
         public Membership()
         {
-            MembershipId = Guid.NewGuid().ToString();
-            Type = MembershipType.Family;
-            Members = new List<Member>();
-            Students = new List<Student>();
-            Address = new Address();
+            //MembershipId = Guid.NewGuid().ToString();
+            //Type = MembershipType.Family;
+            //Members = new List<Member>();
+            //Students = new List<Student>();
+            //Address = new Address();
         }
     }
 

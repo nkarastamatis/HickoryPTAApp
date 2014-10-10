@@ -2,9 +2,13 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Threading.Tasks;
 using System.Web.Mvc;
 using PTAData.Entities;
 using HickoryPTAApp.Models;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
+
 
 namespace HickoryPTAApp.Controllers
 {   
@@ -12,6 +16,8 @@ namespace HickoryPTAApp.Controllers
     {
 		private readonly IMembershipRepository membershipRepository;
 		private readonly IMemberRepository memberRepository;
+
+        private ApplicationUserManager _userManager;
 
 		// If you are using Dependency Injection, you can delete the following constructor
         public MembersController() : this(new MembershipRepository(), new MemberRepository())
@@ -22,6 +28,18 @@ namespace HickoryPTAApp.Controllers
         {
 			this.membershipRepository = membershipRepository;
 			this.memberRepository = memberRepository;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
         }
 
         //
@@ -35,7 +53,7 @@ namespace HickoryPTAApp.Controllers
         //
         // GET: /Members/Details/5
 
-        public ViewResult Details(string id)
+        public ViewResult Details(int id)
         {
             return View(memberRepository.Find(id));
         }
@@ -45,7 +63,8 @@ namespace HickoryPTAApp.Controllers
 
         public ActionResult Create()
         {
-			ViewBag.PossibleMemberships = membershipRepository.All;
+            ViewBag.PossibleMemberships = membershipRepository.All.AsEnumerable().ToList();
+            var list = ((IEnumerable<PTAData.Entities.Membership>)ViewBag.PossibleMemberships);
             return View();
         } 
 
@@ -58,17 +77,65 @@ namespace HickoryPTAApp.Controllers
             if (ModelState.IsValid) {
                 memberRepository.InsertOrUpdate(member);
                 memberRepository.Save();
+
+                var membership = membershipRepository.Find(member.MembershipId);
+                if (membership != null &&
+                    membership.Address.StreetAddress == "PTA Chairs")
+                {
+                    AddUser(member);
+                }
+
                 return RedirectToAction("Index");
             } else {
 				ViewBag.PossibleMemberships = membershipRepository.All;
 				return View();
 			}
         }
+
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        private async Task<ActionResult> AddUser(Member member)
+        {
+            var user = new ApplicationUser { UserName = member.Email, Email = member.Email };
+            IdentityResult result = new IdentityResult();
+            try
+            {
+                user.MemberId = member.MemberId;
+                result = UserManager.Create(user, "Hickory1");
+            }
+            catch (Exception ex)
+            {
+                int x = 0;
+            }
+            if (result.Succeeded)
+            {
+                try
+                {
+                    var code = UserManager.GenerateEmailConfirmationToken(user.Id);
+                    //var code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action(
+                       "ConfirmEmail", "Account",
+                       new { userId = user.Id, code = code },
+                       protocol: Request.Url.Scheme);
+
+                    UserManager.SendEmail(user.Id,
+                       "Confirm your account",
+                       "Please confirm your account by clicking this link: <a href=\""
+                                                       + callbackUrl + "\">link</a>");
+                }
+                catch (Exception ex)
+                {
+                    int i = 0;
+                }
+            }
+
+            return null;
+        }
         
         //
         // GET: /Members/Edit/5
  
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
 			ViewBag.PossibleMemberships = membershipRepository.All;
              return View(memberRepository.Find(id));
@@ -93,7 +160,7 @@ namespace HickoryPTAApp.Controllers
         //
         // GET: /Members/Delete/5
  
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             return View(memberRepository.Find(id));
         }
@@ -102,7 +169,7 @@ namespace HickoryPTAApp.Controllers
         // POST: /Members/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             memberRepository.Delete(id);
             memberRepository.Save();

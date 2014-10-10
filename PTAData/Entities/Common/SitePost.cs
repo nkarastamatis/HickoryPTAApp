@@ -12,7 +12,7 @@ namespace PTAData.Entities
     {
         [Key]
         [Column(Order=1)]
-        public string PostId { get; set; }
+        public int PostId { get; set; }
         public string PostTitle { get; set; }
         public string PostBody { get; set; }
 

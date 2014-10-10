@@ -27,14 +27,14 @@ namespace HickoryPTAApp.Models
             return query;
         }
 
-        public Member Find(string id)
+        public Member Find(int id)
         {
             return context.Members.Find(id);
         }
 
         public void InsertOrUpdate(Member member)
         {
-            if (member.MemberId == default(string)) {
+            if (member.MemberId == default(int)) {
                 // New entity
                 context.Members.Add(member);
             } else {
@@ -43,7 +43,7 @@ namespace HickoryPTAApp.Models
             }
         }
 
-        public void Delete(string id)
+        public void Delete(int id)
         {
             var member = context.Members.Find(id);
             context.Members.Remove(member);
@@ -64,9 +64,9 @@ namespace HickoryPTAApp.Models
     {
         IQueryable<Member> All { get; }
         IQueryable<Member> AllIncluding(params Expression<Func<Member, object>>[] includeProperties);
-        Member Find(string id);
+        Member Find(int id);
         void InsertOrUpdate(Member member);
-        void Delete(string id);
+        void Delete(int id);
         void Save();
     }
 }

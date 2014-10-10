@@ -12,7 +12,7 @@ namespace PTAData.Entities
     {
         [Key]
         [Column(Order = 1)]
-        public string FileId { get; set; }
+        public int FileId { get; set; }
         public string FileName { get; set; }
         public string Path { get; set; }
 

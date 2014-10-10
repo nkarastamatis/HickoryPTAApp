@@ -1,19 +1,19 @@
-namespace PTAData.Migrations.PTADataContextMigrations
+namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<PTAData.Entities.PTADataContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<HickoryPTAApp.Models.HickoryPTAAppContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = false;
-            MigrationsDirectory = @"Migrations\PTADataContextMigrations";
+            MigrationsDirectory = @"Migrations\HickoryPTAAppContextMigrations";
         }
 
-        protected override void Seed(PTAData.Entities.PTADataContext context)
+        protected override void Seed(HickoryPTAApp.Models.HickoryPTAAppContext context)
         {
             //  This method will be called after migrating to the latest version.
 

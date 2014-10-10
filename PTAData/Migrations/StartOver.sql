@@ -1,0 +1,9 @@
+﻿drop table ChairPersons;
+drop table CommitteeFiles;
+drop table Members;
+drop table PostFiles;
+drop table Students;
+drop table Teachers;
+drop table CommitteePosts;
+drop table Committees;
+drop table Memberships;

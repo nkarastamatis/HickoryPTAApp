@@ -77,13 +77,10 @@ namespace HickoryPTAApp.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
-                    if (UserManager.IsEmailConfirmed(model.Email))
-                        return RedirectToLocal(returnUrl);
+                    if (model.Password == "Hickory1")
+                        return RedirectToAction("ChangePassword", "Manage");
                     else
-                    {
-                        AuthenticationManager.SignOut();
-                        return View("DisplayEmail");
-                    }
+                        return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:

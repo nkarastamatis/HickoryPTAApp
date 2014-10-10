@@ -18,20 +18,19 @@ namespace PTAData.Entities
             // TODO: Add constructor logic here
             //
 
-            StudentId = Guid.NewGuid().ToString();
         }
 
-        public string StudentId { get; set; }
+        public int StudentId { get; set; }
         public PersonName Name { get; set; }
 
         [Required]
-        public string MembershipId { get; set; }
-        [ForeignKey("MembershipId")]
-        public Membership Membership { get; set; }
+        public int MembershipId { get; set; }
+        //[ForeignKey("MembershipId")]
+        public virtual Membership Membership { get; set; }
 
         [Required]
-        public string TeacherId { get; set; }
-        [ForeignKey("TeacherId")]
-        public Teacher Teacher { get; set; }
+        public int TeacherId { get; set; }
+        //[ForeignKey("TeacherId")]
+        public virtual Teacher Teacher { get; set; }
     }
 }

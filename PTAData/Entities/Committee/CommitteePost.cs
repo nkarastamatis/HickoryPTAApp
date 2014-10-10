@@ -13,6 +13,6 @@ namespace PTAData.Entities
     {
         [Key]
         [Column(Order = 2)]
-        public string CommitteeId { get; set; }
+        public int CommitteeId { get; set; }
     }
 }

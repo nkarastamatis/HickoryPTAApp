@@ -17,7 +17,7 @@ namespace PTAData.Entities
     [Serializable]
     public class Committee : IAutoGenerateFields
     {
-        public string CommitteeId { get; set; }
+        public int CommitteeId { get; set; }
         public string CommitteeName { get; set; }
         public string Description { get; set; }
 

@@ -13,7 +13,7 @@ namespace PTAData.Entities
     [Serializable]
     public class Teacher
     {
-        public string TeacherId { get; set; }
+        public int TeacherId { get; set; }
         public PersonName Name { get; set; }
         public Grade Grade { get; set; }
 
@@ -22,9 +22,6 @@ namespace PTAData.Entities
             //
             // TODO: Add constructor logic here
             //
-            TeacherId = Guid.NewGuid().ToString();
-            Name = new PersonName();
-            Grade = new Grade();
         }
 
         public string NameString

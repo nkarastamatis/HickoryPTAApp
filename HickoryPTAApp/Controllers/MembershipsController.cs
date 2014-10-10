@@ -33,7 +33,7 @@ namespace HickoryPTAApp.Controllers
         //
         // GET: /Memberships/Details/5
 
-        public ViewResult Details(string id)
+        public ViewResult Details(int id)
         {
             return View(membershipRepository.Find(id));
         }
@@ -64,7 +64,7 @@ namespace HickoryPTAApp.Controllers
         //
         // GET: /Memberships/Edit/5
  
-        public ActionResult Edit(string id)
+        public ActionResult Edit(int id)
         {
              return View(membershipRepository.Find(id));
         }
@@ -87,7 +87,7 @@ namespace HickoryPTAApp.Controllers
         //
         // GET: /Memberships/Delete/5
  
-        public ActionResult Delete(string id)
+        public ActionResult Delete(int id)
         {
             return View(membershipRepository.Find(id));
         }
@@ -96,7 +96,7 @@ namespace HickoryPTAApp.Controllers
         // POST: /Memberships/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(string id)
+        public ActionResult DeleteConfirmed(int id)
         {
             membershipRepository.Delete(id);
             membershipRepository.Save();

@@ -2,5 +2,9 @@
 Enable-Migrations -ProjectName PTAData -ContextTypeName PTAData.Entities.CommitteeContext -MigrationsDirectory Migrations\CommitteeContextMigrations
 Add-Migration Initial -ConfigurationTypeName PTAData.Migrations.CommitteeContextMigrations.Configuration -ProjectName PTAData
 
-
+Enable-Migrations -ProjectName PTAData -ContextTypeName PTAData.Entities.PTADataContext -MigrationsDirectory Migrations\PTADataContextMigrations
+Add-Migration Initial -ConfigurationTypeName PTAData.Migrations.PTADataContextMigrations.Configuration -ProjectName PTAData
 Add-Migration AddMemberId -ConfigurationTypeName HickoryPTAApp.Migrations.ApplicationDbContextMigrations.Configuration -ProjectName HickoryPTAApp
+
+Enable-Migrations -ProjectName HickoryPTAApp -ContextTypeName HickoryPTAApp.Models.HickoryPTAAppContext -MigrationsDirectory Migrations\HickoryPTAAppContextMigrations
+Add-Migration Initial -ConfigurationTypeName HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations.Configuration -ProjectName HickoryPTAApp

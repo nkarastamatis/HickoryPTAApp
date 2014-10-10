@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.EntityFramework;
 using PTAData.Entities;
+using System.Web;
 
 namespace HickoryPTAApp.Models
 {
@@ -18,7 +19,7 @@ namespace HickoryPTAApp.Models
             return userIdentity;
         }
 
-        public string MemberId { get; set; }
+        public int MemberId { get; set; }
         public virtual Member Member { get; set; }
     }
 
@@ -34,4 +35,5 @@ namespace HickoryPTAApp.Models
             return new ApplicationDbContext();
         }
     }
+
 }
