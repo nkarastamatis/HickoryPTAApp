@@ -11,7 +11,6 @@ namespace PTAData.Entities
     public class SitePost : IAutoGenerateFields
     {
         [Key]
-        [Column(Order=1)]
         public int PostId { get; set; }
         public string PostTitle { get; set; }
         public string PostBody { get; set; }

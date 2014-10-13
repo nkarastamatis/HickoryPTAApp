@@ -1,0 +1,17 @@
+﻿@model PTAData.Entities.Member
+
+
+<div class="form-group">
+    <div class="col-sm-2">
+        @Html.EditorFor(model => model.Name.First, "Text")
+    </div>
+    <div class="col-sm-3">
+        @Html.EditorFor(model => model.Name.Last, "Text")
+    </div>
+    <div class="col-sm-4">
+        @Html.EditorFor(model => model.Email, "Text")
+    </div>
+    <div class="col-sm-3">
+        @Html.EditorFor(model => model.Phone, "Text")
+    </div>
+</div>

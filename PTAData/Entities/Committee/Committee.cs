@@ -37,6 +37,17 @@ namespace PTAData.Entities
             Initialize();
         }
 
+        public void UpdateForeignKeys()
+        {
+            if (ChairPersons != null)
+            foreach (var chair in ChairPersons)
+                chair.CommitteeId = CommitteeId;
+
+            if (Posts != null)
+            foreach (var post in Posts)
+                post.CommitteeId = CommitteeId;
+        }
+
         private void Initialize()
         {
             //ChairPersons = new List<ChairPerson>();

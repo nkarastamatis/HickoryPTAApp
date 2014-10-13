@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.ComponentModel.DataAnnotations;
 
 namespace PTAData.Entities
 {
@@ -12,7 +13,9 @@ namespace PTAData.Entities
     [Serializable]
     public class PersonName
     {
+        [Display(Prompt = "First Name")]
         public string First { get; set; }
+        [Display(Prompt = "Last Name")]
         public string Last { get; set; }
 
         public PersonName()

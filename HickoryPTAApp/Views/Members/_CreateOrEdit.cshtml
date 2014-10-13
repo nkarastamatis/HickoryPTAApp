@@ -2,40 +2,21 @@
 
 @* This partial view defines form fields that will appear when creating and editing entities *@
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.Name)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Name.First)
-    @Html.EditorFor(model => model.Name.Last)
-    @Html.ValidationMessageFor(model => model.Name)
+@Html.EditorFor(model => model, "Member")
+
+<div class="form-group">
+    @Html.LabelFor(m => m.MembershipId, "Membership", new { @class = "col-md-12" })
+    <div class="col-md-4">
+        @{var list = ((IEnumerable<PTAData.Entities.Membership>)ViewBag.PossibleMemberships);}
+        @Html.DropDownListFor(model => model.MembershipId, list.Select(option => new SelectListItem
+        {
+            Text = option.Address.StreetAddress,
+            Value = option.MembershipId.ToString(),
+            Selected = (Model != null) && (option.MembershipId == Model.MembershipId)
+        }), 
+        "Choose...",
+        new { @class = "form-control" })
+        @Html.ValidationMessageFor(model => model.MembershipId)
+    </div>
 </div>
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.Phone)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Phone)
-    @Html.ValidationMessageFor(model => model.Phone)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Email)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Email)
-    @Html.ValidationMessageFor(model => model.Email)
-</div>
-
-<div class="editor-label">
-    Membership
-</div>
-<div class="editor-field">
-    @{var list = ((IEnumerable<PTAData.Entities.Membership>)ViewBag.PossibleMemberships);}
-    @Html.DropDownListFor(model => model.MembershipId, list.Select(option => new SelectListItem {
-        Text = option.Address.StreetAddress, 
-        Value = option.MembershipId.ToString(),
-        Selected = (Model != null) && (option.MembershipId == Model.MembershipId)
-    }), "Choose...")
-    @Html.ValidationMessageFor(model => model.MembershipId)
-</div>

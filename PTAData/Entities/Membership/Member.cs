@@ -16,7 +16,9 @@ namespace PTAData.Entities
     {
         public int MemberId { get; set; }
         public PersonName Name { get; set; }
+        [Display(Prompt="Phone")]
         public string Phone { get; set; }
+        [Display(Prompt = "Email")]
         public string Email { get; set; }
 
         [Required]

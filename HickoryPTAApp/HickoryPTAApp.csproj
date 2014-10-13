@@ -189,10 +189,12 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CommitteesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MembershipsController.cs" />
+    <Compile Include="Extentions\HtmlHelperExtentions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -213,8 +215,13 @@
     <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410101149058_KeysToInt.Designer.cs">
       <DependentUpon>201410101149058_KeysToInt.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410121902328_ChangePostKey.cs" />
+    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410121902328_ChangePostKey.Designer.cs">
+      <DependentUpon>201410121902328_ChangePostKey.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\HickoryPTAAppContextMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\CommitteeRepository.cs" />
     <Compile Include="Models\HickoryPTAAppContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
@@ -305,6 +312,16 @@
     <Content Include="Views\Memberships\Details.cshtml" />
     <Content Include="Views\Memberships\Index.cshtml" />
     <Content Include="Views\Memberships\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Text.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Member.cshtml" />
+    <Content Include="Views\Committees\Create.cshtml" />
+    <Content Include="Views\Committees\Edit.cshtml" />
+    <Content Include="Views\Committees\Delete.cshtml" />
+    <Content Include="Views\Committees\Details.cshtml" />
+    <Content Include="Views\Committees\Index.cshtml" />
+    <Content Include="Views\Committees\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Committees\Pages.cshtml" />
+    <Content Include="Views\Committees\EditorTemplates\CommitteePost.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -334,6 +351,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410101149058_KeysToInt.resx">
       <DependentUpon>201410101149058_KeysToInt.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410121902328_ChangePostKey.resx">
+      <DependentUpon>201410121902328_ChangePostKey.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

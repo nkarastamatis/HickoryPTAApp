@@ -11,8 +11,8 @@ namespace PTAData.Entities
     [Serializable]
     public class CommitteePost : SitePost
     {
-        [Key]
-        [Column(Order = 2)]
         public int CommitteeId { get; set; }
+
+        public virtual Committee Committee { get; set; }
     }
 }

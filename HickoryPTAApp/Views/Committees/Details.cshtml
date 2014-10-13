@@ -1,0 +1,41 @@
+@model PTAData.Entities.Committee
+
+@{
+    ViewBag.Title = "Details";
+}
+
+<h2>Details</h2>
+
+<fieldset>
+    <legend>Committee</legend>
+
+    <div class="display-label">CommitteeName</div>
+    <div class="display-field">@Model.CommitteeName</div>
+
+    <div class="display-label">Description</div>
+    <div class="display-field">@Model.Description</div>
+
+    <div class="display-label">ChairPersons</div>
+    <div class="display-field">@(Model.ChairPersons == null ? "None" : Model.ChairPersons.Count.ToString())</div>
+
+    <div class="display-label">AttachedFiles</div>
+    <div class="display-field">@(Model.AttachedFiles == null ? "None" : Model.AttachedFiles.Count.ToString())</div>
+
+    <div class="display-label">Posts</div>
+    <div class="display-field">@(Model.Posts == null ? "None" : Model.Posts.Count.ToString())</div>
+
+    <div class="display-label">LastModified</div>
+    <div class="display-field">@String.Format("{0:g}", Model.LastModified)</div>
+
+    <div class="display-label">CreatedOn</div>
+    <div class="display-field">@String.Format("{0:g}", Model.CreatedOn)</div>
+
+    <div class="display-label">UserModified</div>
+    <div class="display-field">@Model.UserModified</div>
+</fieldset>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id=Model.CommitteeId }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>
+
+

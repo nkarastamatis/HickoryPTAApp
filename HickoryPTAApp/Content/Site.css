@@ -22,3 +22,13 @@ select,
 textarea {
     max-width: 280px;
 }
+
+
+/* From custom.css 2-column.html of www.html5templatesdreamweaver.com */
+.divPanel {}
+
+.divPanel.notop {padding-top:0px}
+
+.divPanel.nobottom {padding-bottom:0px}
+
+.divPanel {padding: 40px;;;;}

@@ -1,21 +1,25 @@
 @model PTAData.Entities.Member
-
+@using HickoryPTAApp.Extentions
 @{
     ViewBag.Title = "Create";
 }
 
 <h2>Create</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginHorizontalForm())
+{
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Member</legend>
 
 		@Html.Partial("_CreateOrEdit", Model)
 
-        <p>
-            <input type="submit" value="Create" />
-        </p>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" class="btn btn-default" value="Create" />
+            </div>
+        </div>
+
     </fieldset>
 }
 

@@ -1,0 +1,14 @@
+﻿@model PTAData.Entities.CommitteePost
+
+@{
+}
+
+@Html.LabelFor(model => model.PostTitle)
+@Html.EditorFor(model => model.PostTitle)
+@Html.LabelFor(model => model.PostBody)
+@Html.EditorFor(model => model.PostBody)
+
+@Html.HiddenFor(model => model.PostId)
+@Html.HiddenFor(model => model.LastModified)
+@Html.HiddenFor(model => model.UserModified)
+@Html.HiddenFor(model => model.CreatedOn)
