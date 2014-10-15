@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using PTAData.Entities;
 using HickoryPTAApp.Models;
+using HickoryPTAApp.Extentions;
 
 namespace HickoryPTAApp.Controllers
 {   
@@ -62,17 +63,24 @@ namespace HickoryPTAApp.Controllers
 
         [HttpPost]
         public ActionResult Create(Committee committee)
-        {
+        {          
             if (ModelState.IsValid) {
-                committee.UserModified = User != null ? User.Identity.Name : "Anonymous";
-                committeeRepository.InsertOrUpdate(committee);
+                committeeRepository.InsertOrUpdate(committee, CurrentUser);
                 committeeRepository.Save();
                 return RedirectToAction("Index");
             } else {
 				return View();
 			}
         }
-        
+
+        public string CurrentUser
+        {
+            get
+            {
+                return User != null ? User.Identity.Name : "Anonymous";
+            }
+        }
+
         //
         // GET: /Committees/Edit/5
  
@@ -85,15 +93,35 @@ namespace HickoryPTAApp.Controllers
         // POST: /Committees/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Committee committee)
+        public ActionResult Edit(Committee committee, string Command)
         {
             if (ModelState.IsValid) {
-                committeeRepository.InsertOrUpdate(committee);
-                committeeRepository.Save();
-                return RedirectToAction("Index");
+                switch (Command)
+                {
+                    case "Save":
+                        return Save(committee);
+                    case "AddCommittePost":
+                        return AddCommitteePost(committee);
+                    default:
+                        return View();
+                }
+                
             } else {
 				return View();
 			}
+        }
+
+        private ActionResult Save(Committee committee)
+        {
+            committeeRepository.InsertOrUpdate(committee, CurrentUser);
+            committeeRepository.Save();
+            return RedirectToAction("Index");
+        }
+
+        private ActionResult AddCommitteePost(Committee committee)
+        {
+            committee.Posts.Add(new CommitteePost());
+            return View(committee);
         }
 
         //

@@ -6,9 +6,10 @@ using System.Threading.Tasks;
 
 namespace PTAData.Entities
 {
-    public class CommitteeEvent : CommitteePost
+    public class Location
     {
-        public DateTime EventDate { get; set; }
-        public Location Location { get; set; }
+        public int LocationId { get; set; }
+        public string Name { get; set; }
+        public Address Address { get; set; }
     }
 }

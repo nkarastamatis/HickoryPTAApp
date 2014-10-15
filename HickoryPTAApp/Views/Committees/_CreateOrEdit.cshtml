@@ -6,7 +6,7 @@
     @Html.LabelFor(model => model.CommitteeName)
 </div>
 <div class="editor-field">
-    @Html.EditorFor(model => model.CommitteeName)
+    @Html.EditorFor(model => model.CommitteeName, "Text")
     @Html.ValidationMessageFor(model => model.CommitteeName)
 </div>
 
@@ -20,6 +20,7 @@
 
 @Html.LabelFor(model => model.Posts)
 @Html.EditorFor(model => model.Posts)
+<input type="submit" name="Command" value="AddCommittePost" />
 
 @Html.HiddenFor(model => model.LastModified)
 @Html.HiddenFor(model => model.UserModified)

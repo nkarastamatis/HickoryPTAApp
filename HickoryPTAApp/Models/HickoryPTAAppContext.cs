@@ -30,6 +30,7 @@ namespace HickoryPTAApp.Models
         public DbSet<Committee> Committees { get; set; }
         public DbSet<CommitteeFile> CommitteeFiles { get; set; }
         public DbSet<CommitteePost> CommitteePosts { get; set; }
+        public DbSet<CommitteeEvent> CommitteeEvents { get; set; }
 
         public DbSet<Membership> Memberships { get; set; }
         public DbSet<Member> Members { get; set; }

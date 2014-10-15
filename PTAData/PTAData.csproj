@@ -67,6 +67,7 @@
   <ItemGroup>
     <Compile Include="Entities\Committee\ChairPerson.cs" />
     <Compile Include="Entities\Committee\Committee.cs" />
+    <Compile Include="Entities\Common\Location.cs" />
     <Compile Include="Entities\PTADataContext.cs" />
     <Compile Include="Entities\Committee\CommitteePost.cs" />
     <Compile Include="Entities\Committee\CommitteeEvent.cs" />
@@ -77,7 +78,7 @@
     <Compile Include="Entities\Common\IAutoGenerateFields.cs" />
     <Compile Include="Entities\Common\PersonName.cs" />
     <Compile Include="Entities\Common\ServerFile.cs" />
-    <Compile Include="Entities\Membership\Address.cs" />
+    <Compile Include="Entities\Common\Address.cs" />
     <Compile Include="Entities\Membership\Member.cs" />
     <Compile Include="Entities\Membership\MembershipModels.cs" />
     <Compile Include="Entities\Membership\Student.cs" />

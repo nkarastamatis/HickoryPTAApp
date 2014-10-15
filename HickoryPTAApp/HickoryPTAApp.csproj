@@ -219,6 +219,10 @@
     <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410121902328_ChangePostKey.Designer.cs">
       <DependentUpon>201410121902328_ChangePostKey.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410150216048_AddCommitteeEvents.cs" />
+    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410150216048_AddCommitteeEvents.Designer.cs">
+      <DependentUpon>201410150216048_AddCommitteeEvents.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\HickoryPTAAppContextMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\CommitteeRepository.cs" />
@@ -354,6 +358,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410121902328_ChangePostKey.resx">
       <DependentUpon>201410121902328_ChangePostKey.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410150216048_AddCommitteeEvents.resx">
+      <DependentUpon>201410150216048_AddCommitteeEvents.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

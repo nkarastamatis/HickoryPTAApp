@@ -13,6 +13,7 @@ namespace PTAData.Entities
         [Key]
         public int PostId { get; set; }
         public string PostTitle { get; set; }
+        [DataType(DataType.MultilineText)]
         public string PostBody { get; set; }
 
         public virtual ICollection<PostFile> Files { get; set; }

@@ -19,14 +19,13 @@ namespace PTAData.Entities
     {
         public int CommitteeId { get; set; }
         public string CommitteeName { get; set; }
+        [DataType(DataType.MultilineText)]
         public string Description { get; set; }
 
-        //[ForeignKey("CommitteeName")]
         public virtual ICollection<ChairPerson> ChairPersons { get; set; }
-        //[ForeignKey("CommitteeName")]
         public virtual ICollection<CommitteeFile> AttachedFiles { get; set; }
-        //[ForeignKey("CommitteeName")]
         public virtual ICollection<CommitteePost> Posts { get; set; }
+        public virtual ICollection<CommitteeEvent> Events { get; set; }
 
 
         public Committee()
