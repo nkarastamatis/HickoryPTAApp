@@ -10,9 +10,7 @@ namespace PTAData.Entities
 {
     public class PostFile : ServerFile
     {
-        [Key]
-        [Column(Order = 2)]
-        public int EntryId { get; set; }
+        public int PostId { get; set; }
 
         public PostFile()
         {

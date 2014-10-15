@@ -72,8 +72,8 @@
     <Compile Include="Entities\Committee\CommitteePost.cs" />
     <Compile Include="Entities\Committee\CommitteeEvent.cs" />
     <Compile Include="Entities\Committee\CommitteeFiles.cs" />
-    <Compile Include="Entities\Committee\EntryFile.cs" />
-    <Compile Include="Entities\Common\SitePost.cs" />
+    <Compile Include="Entities\Common\PostFile.cs" />
+    <Compile Include="Entities\Common\Post.cs" />
     <Compile Include="Entities\Common\Convert.cs" />
     <Compile Include="Entities\Common\IAutoGenerateFields.cs" />
     <Compile Include="Entities\Common\PersonName.cs" />

@@ -26,6 +26,8 @@ namespace HickoryPTAApp.Models
         //public DbSet<PTAData.Entities.Member> Members { get; set; }
 
         //public DbSet<PTAData.Entities.Membership> Memberships { get; set; }
+        public DbSet<Post> Posts { get; set; }
+        public DbSet<PostFile> PostFiles { get; set; }
 
         public DbSet<Committee> Committees { get; set; }
         public DbSet<CommitteeFile> CommitteeFiles { get; set; }
@@ -36,5 +38,22 @@ namespace HickoryPTAApp.Models
         public DbSet<Member> Members { get; set; }
         public DbSet<Student> Students { get; set; }
         public DbSet<Teacher> Teachers { get; set; }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="modelBuilder"></param>
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<PostFile>().ToTable("PostFiles");
+            modelBuilder.Entity<Post>().ToTable("Posts");
+
+            modelBuilder.Entity<Committee>().ToTable("Committees");
+            modelBuilder.Entity<CommitteeFile>().ToTable("CommitteeFiles");
+            modelBuilder.Entity<CommitteePost>().ToTable("CommitteePosts");
+            modelBuilder.Entity<CommitteeEvent>().ToTable("CommitteeEvents");
+
+        }
     }
+
 }

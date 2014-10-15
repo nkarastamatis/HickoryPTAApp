@@ -207,21 +207,9 @@
       <DependentUpon>201410101634051_MemeberId.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDbContextMigrations\Configuration.cs" />
-    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410101139295_Initial.cs" />
-    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410101139295_Initial.Designer.cs">
-      <DependentUpon>201410101139295_Initial.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410101149058_KeysToInt.cs" />
-    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410101149058_KeysToInt.Designer.cs">
-      <DependentUpon>201410101149058_KeysToInt.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410121902328_ChangePostKey.cs" />
-    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410121902328_ChangePostKey.Designer.cs">
-      <DependentUpon>201410121902328_ChangePostKey.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410150216048_AddCommitteeEvents.cs" />
-    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410150216048_AddCommitteeEvents.Designer.cs">
-      <DependentUpon>201410150216048_AddCommitteeEvents.cs</DependentUpon>
+    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410150322202_Initial.cs" />
+    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410150322202_Initial.Designer.cs">
+      <DependentUpon>201410150322202_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\HickoryPTAAppContextMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -350,17 +338,8 @@
     <EmbeddedResource Include="Migrations\ApplicationDbContextMigrations\201410101634051_MemeberId.resx">
       <DependentUpon>201410101634051_MemeberId.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410101139295_Initial.resx">
-      <DependentUpon>201410101139295_Initial.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410101149058_KeysToInt.resx">
-      <DependentUpon>201410101149058_KeysToInt.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410121902328_ChangePostKey.resx">
-      <DependentUpon>201410121902328_ChangePostKey.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410150216048_AddCommitteeEvents.resx">
-      <DependentUpon>201410150216048_AddCommitteeEvents.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410150322202_Initial.resx">
+      <DependentUpon>201410150322202_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>

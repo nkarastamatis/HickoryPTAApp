@@ -11,7 +11,6 @@ namespace PTAData.Entities
     public class ServerFile : IAutoGenerateFields
     {
         [Key]
-        [Column(Order = 1)]
         public int FileId { get; set; }
         public string FileName { get; set; }
         public string Path { get; set; }

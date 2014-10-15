@@ -4,6 +4,7 @@ namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using PTAData.Entities;
 
     internal sealed class Configuration : DbMigrationsConfiguration<HickoryPTAApp.Models.HickoryPTAAppContext>
     {

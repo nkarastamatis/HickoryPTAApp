@@ -8,7 +8,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace PTAData.Entities
 {
-    public class SitePost : IAutoGenerateFields
+    public class Post : IAutoGenerateFields
     {
         [Key]
         public int PostId { get; set; }

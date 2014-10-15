@@ -10,8 +10,6 @@ namespace PTAData.Entities
 {
     public class CommitteeFile : ServerFile
     {
-        [Key]
-        [Column(Order = 2)]
         public int CommitteeId { get; set; }
 
         public CommitteeFile()

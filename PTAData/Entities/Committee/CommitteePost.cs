@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace PTAData.Entities
 {
     [Serializable]
-    public class CommitteePost : SitePost
+    public class CommitteePost : Post
     {
         public int CommitteeId { get; set; }
 
