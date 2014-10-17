@@ -4,6 +4,8 @@ namespace HickoryPTAApp.Migrations.ApplicationDbContextMigrations
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
+    using Microsoft.AspNet.Identity;
+    using Microsoft.AspNet.Identity.EntityFramework;
 
     internal sealed class Configuration : DbMigrationsConfiguration<HickoryPTAApp.Models.ApplicationDbContext>
     {
@@ -28,6 +30,46 @@ namespace HickoryPTAApp.Migrations.ApplicationDbContextMigrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            InitializeIdentityForEF(context);
+            base.Seed(context);
+        }
+
+        public void InitializeIdentityForEF(HickoryPTAApp.Models.ApplicationDbContext context)
+        {
+            using (var UserManager = new UserManager<HickoryPTAApp.Models.ApplicationUser>(
+                new UserStore<HickoryPTAApp.Models.ApplicationUser>(context)))
+            using (var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context)))
+            {
+                string username = "Admin";
+                string password = "Hickory1";
+                string role = "Administrator";
+
+                //Create Role Administrator if it does not exist
+                if (!RoleManager.RoleExists(role))
+                {
+                    var roleresult = RoleManager.Create(new IdentityRole(role));
+                }
+
+                // Create User=Admin with password=123456
+                var user = new HickoryPTAApp.Models.ApplicationUser();
+                user.UserName = username;
+
+                using (var membershipRepo = new HickoryPTAApp.Models.MemberRepository())
+                {
+                    var defaultAdminMember = membershipRepo.DefaultAdminMember();
+                    user.MemberId = defaultAdminMember.MemberId;
+                    user.Email = defaultAdminMember.Email;
+                }
+
+                var adminresult = UserManager.Create(user, password);
+
+                //Add User Admin to Role Admin
+                if (adminresult.Succeeded)
+                {
+                    var result = UserManager.AddToRole(user.Id, role);
+                }
+            }
         }
     }
 }

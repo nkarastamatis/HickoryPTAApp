@@ -65,6 +65,24 @@ namespace HickoryPTAApp.Models
         {
             context.Dispose();
         }
+
+        internal Membership DefaultAdminMembership()
+        {
+            var defaultAdminMembership = All.FirstOrDefault(m => m.Address.StreetAddress == "Admin");
+
+            if (defaultAdminMembership == null)
+            {
+                defaultAdminMembership = new Membership()
+                {
+                    Address = new Address() { StreetAddress = "Admin" },
+                };
+
+                InsertOrUpdate(defaultAdminMembership);
+                Save();
+            }
+
+            return defaultAdminMembership;
+        }
     }
 
     public interface IMembershipRepository : IDisposable

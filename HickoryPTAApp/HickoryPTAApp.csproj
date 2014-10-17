@@ -189,6 +189,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CommitteesController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
@@ -198,13 +199,9 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\ApplicationDbContextMigrations\201410091959445_InitialCreate.cs" />
-    <Compile Include="Migrations\ApplicationDbContextMigrations\201410091959445_InitialCreate.Designer.cs">
-      <DependentUpon>201410091959445_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\ApplicationDbContextMigrations\201410101634051_MemeberId.cs" />
-    <Compile Include="Migrations\ApplicationDbContextMigrations\201410101634051_MemeberId.Designer.cs">
-      <DependentUpon>201410101634051_MemeberId.cs</DependentUpon>
+    <Compile Include="Migrations\ApplicationDbContextMigrations\201410161503515_Initial.cs" />
+    <Compile Include="Migrations\ApplicationDbContextMigrations\201410161503515_Initial.Designer.cs">
+      <DependentUpon>201410161503515_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDbContextMigrations\Configuration.cs" />
     <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410150322202_Initial.cs" />
@@ -213,6 +210,7 @@
     </Compile>
     <Compile Include="Migrations\HickoryPTAAppContextMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AdminModels.cs" />
     <Compile Include="Models\CommitteeRepository.cs" />
     <Compile Include="Models\HickoryPTAAppContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -314,6 +312,8 @@
     <Content Include="Views\Committees\_CreateOrEdit.cshtml" />
     <Content Include="Views\Committees\Pages.cshtml" />
     <Content Include="Views\Committees\EditorTemplates\CommitteePost.cshtml" />
+    <Content Include="Views\Admin\Roles.cshtml" />
+    <Content Include="Views\Admin\Users.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
@@ -332,11 +332,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\ApplicationDbContextMigrations\201410091959445_InitialCreate.resx">
-      <DependentUpon>201410091959445_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\ApplicationDbContextMigrations\201410101634051_MemeberId.resx">
-      <DependentUpon>201410101634051_MemeberId.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\ApplicationDbContextMigrations\201410161503515_Initial.resx">
+      <DependentUpon>201410161503515_Initial.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410150322202_Initial.resx">
       <DependentUpon>201410150322202_Initial.cs</DependentUpon>

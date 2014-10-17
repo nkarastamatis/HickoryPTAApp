@@ -10,7 +10,7 @@ namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
     {
         public Configuration()
         {
-            AutomaticMigrationsEnabled = false;
+            AutomaticMigrationsEnabled = true;
             MigrationsDirectory = @"Migrations\HickoryPTAAppContextMigrations";
         }
 

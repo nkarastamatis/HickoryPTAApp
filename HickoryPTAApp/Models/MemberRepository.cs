@@ -58,6 +58,29 @@ namespace HickoryPTAApp.Models
         {
             context.Dispose();
         }
+
+        public Member DefaultAdminMember()
+        {
+            var defaultAdminMember = All.FirstOrDefault(m => m.Name.First == "Admin");
+
+            if (defaultAdminMember == null)
+            {
+                using (var membershipRepo = new MembershipRepository())
+                {
+                    defaultAdminMember = new Member()
+                    {
+                        Name = new PersonName() { First = "Admin" },
+                        Email = "admin@hickoryPTA.org",
+                        MembershipId = membershipRepo.DefaultAdminMembership().MembershipId
+                    };
+                }
+
+                InsertOrUpdate(defaultAdminMember);
+                Save();
+            }
+
+            return defaultAdminMember;
+        }
     }
 
     public interface IMemberRepository : IDisposable

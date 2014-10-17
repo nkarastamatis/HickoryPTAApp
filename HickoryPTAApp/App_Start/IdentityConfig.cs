@@ -158,6 +158,22 @@ namespace HickoryPTAApp
         }
     }
 
+    public class ApplicationRoleManager : RoleManager<IdentityRole>
+    {
+        public ApplicationRoleManager(RoleStore<IdentityRole> store)
+            : base(store)
+        {
+        }
+
+        public static ApplicationRoleManager Create()
+        {
+            var store = new RoleStore<IdentityRole>(new ApplicationDbContext());
+            var manager = new ApplicationRoleManager(store);
+
+            return manager;
+        }
+    }
+
     // Configure the application sign-in manager which is used in this application.
     public class ApplicationSignInManager : SignInManager<ApplicationUser, string>
     {
