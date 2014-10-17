@@ -37,9 +37,12 @@ namespace HickoryPTAApp.Controllers
         //
         // GET: /Committees/Pages/5
 
-        public ViewResult Pages(int id)
+        public ActionResult Pages(int id)
         {
-            return View(committeeRepository.Find(id));
+            var committee = committeeRepository.Find(id);
+            if (committee == null)
+                return RedirectToAction("Index", "Home");
+            return View(committee);
         }
 
         //

@@ -12,6 +12,7 @@ using System.Data.Entity;
 
 namespace HickoryPTAApp.Controllers
 {
+    [Authorize(Roles = AdminConstants.Roles.Administrator)]
     public class AdminController : Controller
     {
         private ApplicationUserManager _userManager;

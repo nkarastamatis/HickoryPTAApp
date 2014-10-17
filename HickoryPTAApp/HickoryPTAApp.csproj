@@ -195,6 +195,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MembershipsController.cs" />
+    <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Extentions\HtmlHelperExtentions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -210,13 +211,14 @@
     </Compile>
     <Compile Include="Migrations\HickoryPTAAppContextMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
-    <Compile Include="Models\AdminModels.cs" />
-    <Compile Include="Models\CommitteeRepository.cs" />
+    <Compile Include="Models\AdminViewModels.cs" />
+    <Compile Include="Models\NavigationViewModels.cs" />
+    <Compile Include="Models\Repositories\CommitteeRepository.cs" />
     <Compile Include="Models\HickoryPTAAppContext.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\MemberRepository.cs" />
-    <Compile Include="Models\MembershipRepository.cs" />
+    <Compile Include="Models\Repositories\MemberRepository.cs" />
+    <Compile Include="Models\Repositories\MembershipRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -314,6 +316,7 @@
     <Content Include="Views\Committees\EditorTemplates\CommitteePost.cshtml" />
     <Content Include="Views\Admin\Roles.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
+    <Content Include="Views\Shared\_NavBar.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

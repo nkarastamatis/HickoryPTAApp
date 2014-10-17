@@ -43,7 +43,7 @@ namespace HickoryPTAApp.Migrations.ApplicationDbContextMigrations
             {
                 string username = "Admin";
                 string password = "Hickory1";
-                string role = "Administrator";
+                string role = HickoryPTAApp.Models.AdminConstants.Roles.Administrator;
 
                 //Create Role Administrator if it does not exist
                 if (!RoleManager.RoleExists(role))

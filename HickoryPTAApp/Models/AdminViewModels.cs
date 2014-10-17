@@ -19,4 +19,14 @@ namespace HickoryPTAApp.Models
         public List<IdentityRole> Roles { get; set; }
         public string SelectedUserId { get; set; }
     }
+    
+    public static class AdminConstants
+    {
+        public static class Roles
+        {
+            public const string Administrator = "Administrator";
+            public const string BoardMember = "Board Member";
+            public const string CommitteeChair = "Committee Chair";
+        }
+    }
 }

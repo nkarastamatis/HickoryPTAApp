@@ -29,11 +29,7 @@ namespace HickoryPTAApp.Models
 
         public Committee Find(int id)
         {
-            var committee = context.Committees.Find(id);
-            var post = new CommitteePost();
-            post.CreatedOn = DateTime.Now;
-            post.LastModified = DateTime.Now;
-            committee.Posts.Add(post);
+            var committee = context.Committees.Find(id);            
             return committee;
         }
 
