@@ -123,6 +123,8 @@ namespace HickoryPTAApp.Controllers
 
         private ActionResult AddCommitteePost(Committee committee)
         {
+            if (committee.Posts == null)
+                committee.Posts = new List<CommitteePost>();
             committee.Posts.Add(new CommitteePost());
             return View(committee);
         }

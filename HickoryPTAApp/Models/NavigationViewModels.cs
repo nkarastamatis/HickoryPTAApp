@@ -5,7 +5,7 @@ namespace HickoryPTAApp.Models
 {
     public class NavigationViewModel
     {
-        public ICollection<NavigationCommittee> NavigationCommittees { get; set; }
+        public List<NavigationCommittee> NavigationCommittees { get; set; }
 
         public NavigationViewModel()
         {
