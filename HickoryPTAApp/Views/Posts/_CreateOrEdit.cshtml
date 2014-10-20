@@ -1,0 +1,24 @@
+@model PTAData.Entities.Post
+
+@* This partial view defines form fields that will appear when creating and editing entities *@
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.CommitteeName, "Text")
+    @Html.ValidationMessageFor(model => model.CommitteeName)
+</div>
+
+<div class="editor-label">
+    @Html.LabelFor(model => model.Description)
+</div>
+<div class="editor-field">
+    @Html.EditorFor(model => model.Description)
+    @Html.ValidationMessageFor(model => model.Description)
+</div>
+
+@Html.LabelFor(model => model.Posts)
+@Html.EditorFor(model => model.Posts)
+<input type="submit" name="Command" value="AddCommittePost" />
+

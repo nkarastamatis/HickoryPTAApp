@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using PTAData.Entities;
 using HickoryPTAApp.Models;
 using HickoryPTAApp.Extentions;
+using System.Web.Caching;
 
 namespace HickoryPTAApp.Controllers
 {
@@ -13,6 +16,8 @@ namespace HickoryPTAApp.Controllers
     public class CommitteesController : Controller
     {
 		private readonly ICommitteeRepository committeeRepository;
+        private ApplicationUserManager _userManager;
+        private ApplicationRoleManager _roleManager;
 
 		// If you are using Dependency Injection, you can delete the following constructor
         public CommitteesController() : this(new CommitteeRepository())
@@ -22,6 +27,30 @@ namespace HickoryPTAApp.Controllers
         public CommitteesController(ICommitteeRepository committeeRepository)
         {
 			this.committeeRepository = committeeRepository;
+        }
+
+        public ApplicationUserManager UserManager
+        {
+            get
+            {
+                return _userManager ?? HttpContext.GetOwinContext().GetUserManager<ApplicationUserManager>();
+            }
+            private set
+            {
+                _userManager = value;
+            }
+        }
+
+        public ApplicationRoleManager RoleManager
+        {
+            get
+            {
+                return _roleManager ?? ApplicationRoleManager.Create();
+            }
+            private set
+            {
+                _roleManager = value;
+            }
         }
 
         //
@@ -91,7 +120,21 @@ namespace HickoryPTAApp.Controllers
  
         public ActionResult Edit(int id)
         {
-             return View(committeeRepository.Find(id));
+            var userIds = 
+                RoleManager
+                .FindByName(AdminConstants.Roles.CommitteeChair)
+                .Users
+                .Select(u => u.UserId)
+                .ToList();
+            var possibleChairs = UserManager.Users.Where(u => userIds.Contains(u.Id)).ToList();
+            ViewBag.PossibleChairs = possibleChairs;
+            HttpContext.Cache.Insert("PossibleChairs", possibleChairs);
+            return View(committeeRepository.Find(id));
+        }
+
+        private void RemovedCallback(string key, object value, CacheItemRemovedReason reason)
+        {
+            
         }
 
         //
@@ -100,6 +143,8 @@ namespace HickoryPTAApp.Controllers
         [HttpPost]
         public ActionResult Edit(Committee committee, string Command)
         {
+            var cache = new System.Web.Caching.Cache();
+            ViewBag.PossibleChairs = HttpContext.Cache.Get("PossibleChairs");
             if (ModelState.IsValid) {
                 switch (Command)
                 {
@@ -107,6 +152,8 @@ namespace HickoryPTAApp.Controllers
                         return Save(committee);
                     case "AddCommittePost":
                         return AddCommitteePost(committee);
+                    case "AddCommitteChair":
+                        return AddCommitteeChair(committee);
                     default:
                         return View();
                 }
@@ -128,6 +175,14 @@ namespace HickoryPTAApp.Controllers
             if (committee.Posts == null)
                 committee.Posts = new List<CommitteePost>();
             committee.Posts.Add(new CommitteePost());
+            return View(committee);
+        }
+
+        private ActionResult AddCommitteeChair(Committee committee)
+        {
+            if (committee.ChairPersons == null)
+                committee.ChairPersons = new List<ChairPerson>();
+            committee.ChairPersons.Add(new ChairPerson());
             return View(committee);
         }
 
@@ -158,6 +213,8 @@ namespace HickoryPTAApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+        public System.Web.Caching.CacheItemRemovedCallback onRemove { get; set; }
     }
 }
 

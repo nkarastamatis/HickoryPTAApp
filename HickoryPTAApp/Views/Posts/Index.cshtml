@@ -1,0 +1,65 @@
+@model IEnumerable<PTAData.Entities.Post>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table>
+    <tr>
+        <th></th>
+        <th>
+            Title
+        </th>
+        <th>
+            Body
+        </th>
+        <th>
+            Files
+        </th>
+        <th>
+            LastModified
+        </th>
+        <th>
+            CreatedOn
+        </th>
+        <th>
+            UserModified
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.PostId }) |
+            @Html.ActionLink("Details", "Details", new { id = item.PostId }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.PostId })
+        </td>
+        <td>
+			@item.PostTitle
+        </td>
+        <td>
+			@item.PostBody
+        </td>
+        <td>
+			@(item.Files == null ? "None" : item.Files.Count.ToString())
+        </td>
+        <td>
+			@String.Format("{0:g}", item.LastModified)
+        </td>
+        <td>
+			@String.Format("{0:g}", item.CreatedOn)
+        </td>
+        <td>
+			@item.UserModified
+        </td>
+    </tr>
+}
+
+</table>
+
+

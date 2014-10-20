@@ -1,0 +1,9 @@
+﻿@model object
+
+@{
+}
+
+<div class="col-md-6">
+    <textarea class="form-control" rows="5">@Model</textarea>
+    @Html.ValidationMessageFor(model => model)
+</div>

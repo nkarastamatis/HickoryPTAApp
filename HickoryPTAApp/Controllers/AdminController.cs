@@ -96,6 +96,8 @@ namespace HickoryPTAApp.Controllers
         [HttpPost]
         public async Task<ActionResult> Users(AdminUsersViewModel model, string[] SelectedRoles)
         {
+            GetUsersAndRoles(model);
+
             if (SelectedRoles != null && !String.IsNullOrEmpty(model.SelectedUserId))
             {
                 foreach (var selectedRole in SelectedRoles)
@@ -105,9 +107,9 @@ namespace HickoryPTAApp.Controllers
                             UserManager.AddToRole(model.SelectedUserId, selectedRole);
                     }
                 }
+                //var r = UserManager.Update(model.Users.FirstOrDefault(u => u.Id == model.SelectedUserId));
             }
 
-            GetUsersAndRoles(model);
             if (ModelState.IsValid)
             {
                 return View(model);

@@ -6,7 +6,7 @@
 
 <h2>Edit</h2>
 
-@using (Html.BeginForm()) {
+@using (Html.BeginHorizontalForm()) {
     @Html.ValidationSummary(true)
     <fieldset>
         <legend>Committee</legend>
@@ -14,9 +14,11 @@
         @Html.HiddenFor(model => model.CommitteeId)
 		@Html.Partial("_CreateOrEdit", Model)
 
-        <p>
-            <input type="submit" name="Command" value="Save" />
-        </p>
+        <div class="form-group">
+            <div class="col-md-10">
+                <input type="submit" name="Command" value="Save" class="btn btn-default" />
+            </div>
+        </div>
     </fieldset>
 }
 

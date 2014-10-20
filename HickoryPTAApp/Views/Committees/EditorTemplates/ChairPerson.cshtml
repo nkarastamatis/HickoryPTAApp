@@ -1,0 +1,14 @@
+﻿@model PTAData.Entities.ChairPerson
+
+@{
+    var possibleChairs = ViewBag.PossibleChairs as List<HickoryPTAApp.Models.ApplicationUser>;  
+} 
+    @Html.DropDownListFor(model => model.MemberId, possibleChairs.Select(option => new SelectListItem
+        {
+            Text = option.Member.Name.ToString(),
+            Value = option.MemberId.ToString(),
+            Selected = (Model != null) && (option.MemberId == Model.MemberId)
+        }),
+        "Choose...",
+        new { @class = "form-control" })
+    @Html.ValidationMessageFor(model => model.MemberId)

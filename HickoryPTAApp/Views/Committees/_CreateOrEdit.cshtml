@@ -2,27 +2,44 @@
 
 @* This partial view defines form fields that will appear when creating and editing entities *@
 
-<div class="editor-label">
-    @Html.LabelFor(model => model.CommitteeName)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.CommitteeName, "Text")
-    @Html.ValidationMessageFor(model => model.CommitteeName)
-</div>
-
-<div class="editor-label">
-    @Html.LabelFor(model => model.Description)
-</div>
-<div class="editor-field">
-    @Html.EditorFor(model => model.Description)
-    @Html.ValidationMessageFor(model => model.Description)
+<div class="form-group">
+    @Html.LabelFor(model => model.CommitteeName, "Name", new { @class = "col-md-12" })
+    <div class="col-md-6">
+        @Html.EditorFor(model => model.CommitteeName, "Text")
+        @Html.ValidationMessageFor(model => model.CommitteeName)
+    </div>
 </div>
 
-@Html.LabelFor(model => model.Posts)
-@Html.EditorFor(model => model.Posts)
-<input type="submit" name="Command" value="AddCommittePost" />
+<div class="form-group">
+    @Html.LabelFor(model => model.Description, new { @class = "col-md-12" })
+    @Html.EditorFor(model => model.Description, "TextArea")
+</div>
+
+<div class="form-group">
+    @Html.LabelFor(model => model.ChairPersons, new { @class = "col-md-12" })
+    @Html.EditorFor(model => model.ChairPersons)       
+</div>
+<div class="form-group">
+    <div class="col-md-10">
+        <input type="submit" name="Command" value="AddCommitteChair" class="btn btn-default" />
+    </div>
+</div>
+
+<fieldset>
+    <legend>
+        @Html.LabelFor(model => model.Posts)
+    </legend>
+    @Html.EditorFor(model => model.Posts)
+</fieldset>
+
+<div class="form-group">
+    <div class="col-md-10">
+        <input type="submit" name="Command" value="AddCommittePost" class="btn btn-default" />
+    </div>
+</div>
 
 @*@Html.HiddenFor(model => model.CommitteeId)
 @Html.HiddenFor(model => model.LastModified)
 @Html.HiddenFor(model => model.UserModified)
 @Html.HiddenFor(model => model.CreatedOn)*@
+@Html.HiddenFor(model => model.CreatedOn)

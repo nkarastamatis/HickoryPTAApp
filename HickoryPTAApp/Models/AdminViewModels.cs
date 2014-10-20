@@ -15,7 +15,7 @@ namespace HickoryPTAApp.Models
 
     public class AdminUsersViewModel
     {
-        public IEnumerable<IdentityUser> Users { get; set; }
+        public IEnumerable<ApplicationUser> Users { get; set; }
         public List<IdentityRole> Roles { get; set; }
         public string SelectedUserId { get; set; }
     }

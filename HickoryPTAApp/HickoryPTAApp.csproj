@@ -196,6 +196,7 @@
     <Compile Include="Controllers\MembersController.cs" />
     <Compile Include="Controllers\MembershipsController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
+    <Compile Include="Controllers\PostsController.cs" />
     <Compile Include="Extentions\HtmlHelperExtentions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -219,6 +220,7 @@
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Repositories\MemberRepository.cs" />
     <Compile Include="Models\Repositories\MembershipRepository.cs" />
+    <Compile Include="Models\Repositories\PostRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -317,6 +319,12 @@
     <Content Include="Views\Admin\Roles.cshtml" />
     <Content Include="Views\Admin\Users.cshtml" />
     <Content Include="Views\Shared\_NavBar.cshtml" />
+    <Content Include="Views\Posts\Delete.cshtml" />
+    <Content Include="Views\Posts\Edit.cshtml" />
+    <Content Include="Views\Posts\Index.cshtml" />
+    <Content Include="Views\Posts\_CreateOrEdit.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />
+    <Content Include="Views\Committees\EditorTemplates\ChairPerson.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
