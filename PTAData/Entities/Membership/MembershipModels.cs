@@ -13,11 +13,13 @@ namespace PTAData.Entities
     /// </summary>
     public class Membership
     {
+        
         public enum MembershipType
         {
             Single,
-            Family,
-            Corporate
+            Family,            
+            Corporate,
+            Admin
         }
 
         public int MembershipId { get; set; }

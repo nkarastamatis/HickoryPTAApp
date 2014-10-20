@@ -1,7 +1,7 @@
 ﻿@model HickoryPTAApp.Models.AdminUsersViewModel
 
 @{
-    ViewBag.Title = "Users";
+    ViewBag.Title = "Users and Roles";
 }
 
 @functions {
@@ -16,6 +16,8 @@
 
 @using (Html.BeginForm())
 { 
+    <br />
+    <h3>Modify User Roles</h3>
     @Html.DropDownListFor(model => model.SelectedUserId, Model.Users.Select(option => new SelectListItem
         {
             Text = option.UserName,
@@ -44,6 +46,7 @@
 }
 
     <br />
+    <br />
     <table class="table">
         @foreach (var item in Model.Users)
     {
@@ -57,9 +60,9 @@
                 <th>
                     Roles
                 </th>
-                <th>
+                @*<th>
                     Actions
-                </th>
+                </th>*@
             </tr>
             <tr>
                 <td>
@@ -75,11 +78,11 @@
                     @String.Join(", ", roles)
 
                 </td>
-                <td>
+                @*<td>
                     @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
                     @Html.ActionLink("Details", "Details", new { id = item.Id }) |
                     @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-                </td>
+                </td>*@
             </tr>
     }
 

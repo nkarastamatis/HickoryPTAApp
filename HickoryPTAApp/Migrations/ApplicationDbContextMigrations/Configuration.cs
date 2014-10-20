@@ -35,31 +35,40 @@ namespace HickoryPTAApp.Migrations.ApplicationDbContextMigrations
             base.Seed(context);
         }
 
-        public void InitializeIdentityForEF(HickoryPTAApp.Models.ApplicationDbContext context)
+        private void InitializeIdentityForEF(HickoryPTAApp.Models.ApplicationDbContext context)
         {
             using (var UserManager = new UserManager<HickoryPTAApp.Models.ApplicationUser>(
                 new UserStore<HickoryPTAApp.Models.ApplicationUser>(context)))
             using (var RoleManager = new RoleManager<IdentityRole>(new RoleStore<IdentityRole>(context)))
             {
-                string username = "Admin";
-                string password = "Hickory1";
-                string role = HickoryPTAApp.Models.AdminConstants.Roles.Administrator;
-
-                //Create Role Administrator if it does not exist
-                if (!RoleManager.RoleExists(role))
+                foreach (var field in typeof(HickoryPTAApp.Models.AdminConstants.Roles).GetFields())
                 {
-                    var roleresult = RoleManager.Create(new IdentityRole(role));
+                    var role = field.GetValue(null) as string;
+                    if (!RoleManager.RoleExists(role))
+                    {
+                        var roleresult = RoleManager.Create(new IdentityRole(role));
+                    }
                 }
 
-                // Create User=Admin with password=123456
-                var user = new HickoryPTAApp.Models.ApplicationUser();
-                user.UserName = username;
+                // Create Admin User
+                string password = "Hickory1";
+                string adminRole = HickoryPTAApp.Models.AdminConstants.Roles.Administrator;
 
+                //Create Role Administrator if it does not exist
+                if (!RoleManager.RoleExists(adminRole))
+                {
+                    var roleresult = RoleManager.Create(new IdentityRole(adminRole));
+                }
+
+                // Create User=Admin with password=Hickory1
+                var user = new HickoryPTAApp.Models.ApplicationUser();
+                // Link to default AdminMember
                 using (var membershipRepo = new HickoryPTAApp.Models.MemberRepository())
                 {
                     var defaultAdminMember = membershipRepo.DefaultAdminMember();
                     user.MemberId = defaultAdminMember.MemberId;
                     user.Email = defaultAdminMember.Email;
+                    user.UserName = user.Email;
                 }
 
                 var adminresult = UserManager.Create(user, password);
@@ -67,7 +76,7 @@ namespace HickoryPTAApp.Migrations.ApplicationDbContextMigrations
                 //Add User Admin to Role Admin
                 if (adminresult.Succeeded)
                 {
-                    var result = UserManager.AddToRole(user.Id, role);
+                    var result = UserManager.AddToRole(user.Id, adminRole);
                 }
             }
         }

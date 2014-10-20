@@ -8,7 +8,8 @@ using HickoryPTAApp.Models;
 using HickoryPTAApp.Extentions;
 
 namespace HickoryPTAApp.Controllers
-{   
+{
+    [Authorize(Roles = AdminConstants.Roles.Administrator)]
     public class CommitteesController : Controller
     {
 		private readonly ICommitteeRepository committeeRepository;
@@ -37,6 +38,7 @@ namespace HickoryPTAApp.Controllers
         //
         // GET: /Committees/Pages/5
 
+        [AllowAnonymous]
         public ActionResult Pages(int id)
         {
             var committee = committeeRepository.Find(id);

@@ -6,7 +6,22 @@
     @Html.LabelFor(model => model.Type)
 </div>
 <div class="editor-field">
-    @Html.EnumDropDownListFor(model => model.Type)
+    <select data-val="true" data-val-required="The Type field is required." id="Type" name="Type">
+        @foreach (var type in (PTAData.Entities.Membership.MembershipType[])Enum.GetValues(typeof(PTAData.Entities.Membership.MembershipType)))
+        {
+            var attrib = String.Empty;
+            if (type == 0) { attrib = "selected=\"selected\""; };
+            if (type != PTAData.Entities.Membership.MembershipType.Admin)
+            {
+                <option @attrib value="@type">@type.ToString()</option>
+            }
+            else if (type == PTAData.Entities.Membership.MembershipType.Admin &&
+                     User.IsInRole(HickoryPTAApp.Models.AdminConstants.Roles.Administrator))
+            { 
+                <option @attrib value="@type">@type.ToString()</option>
+            }
+        }
+    </select>
     @Html.ValidationMessageFor(model => model.Type)
 </div>
 

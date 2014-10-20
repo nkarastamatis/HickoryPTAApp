@@ -15,6 +15,7 @@ namespace HickoryPTAApp.Controllers
 		// If you are using Dependency Injection, you can delete the following constructor
         public NavigationController() : this(new CommitteeRepository())
         {
+            
         }
 
         public NavigationController(ICommitteeRepository committeeRepository)
