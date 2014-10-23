@@ -65,17 +65,17 @@ namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
                         UserModified = c.String(),
                         CommitteeId = c.Int(),
                         EventDate = c.DateTime(),
+                        CommitteeId1 = c.Int(),
                         Discriminator = c.String(nullable: false, maxLength: 128),
                         Location_LocationId = c.Int(),
-                        Committee_CommitteeId = c.Int(),
                     })
                 .PrimaryKey(t => t.PostId)
-                .ForeignKey("dbo.Locations", t => t.Location_LocationId)
-                .ForeignKey("dbo.Committees", t => t.Committee_CommitteeId)
                 .ForeignKey("dbo.Committees", t => t.CommitteeId)
+                .ForeignKey("dbo.Locations", t => t.Location_LocationId)
+                .ForeignKey("dbo.Committees", t => t.CommitteeId1)
                 .Index(t => t.CommitteeId)
-                .Index(t => t.Location_LocationId)
-                .Index(t => t.Committee_CommitteeId);
+                .Index(t => t.CommitteeId1)
+                .Index(t => t.Location_LocationId);
             
             CreateTable(
                 "dbo.Locations",
@@ -154,16 +154,16 @@ namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
             DropForeignKey("dbo.Students", "TeacherId", "dbo.Teachers");
             DropForeignKey("dbo.Students", "MembershipId", "dbo.Memberships");
             DropForeignKey("dbo.Members", "MembershipId", "dbo.Memberships");
-            DropForeignKey("dbo.Posts", "CommitteeId", "dbo.Committees");
-            DropForeignKey("dbo.Posts", "Committee_CommitteeId", "dbo.Committees");
+            DropForeignKey("dbo.Posts", "CommitteeId1", "dbo.Committees");
             DropForeignKey("dbo.Posts", "Location_LocationId", "dbo.Locations");
+            DropForeignKey("dbo.Posts", "CommitteeId", "dbo.Committees");
             DropForeignKey("dbo.ChairPersons", "CommitteeId", "dbo.Committees");
             DropForeignKey("dbo.ServerFiles", "CommitteeId", "dbo.Committees");
             DropIndex("dbo.Students", new[] { "TeacherId" });
             DropIndex("dbo.Students", new[] { "MembershipId" });
             DropIndex("dbo.Members", new[] { "MembershipId" });
-            DropIndex("dbo.Posts", new[] { "Committee_CommitteeId" });
             DropIndex("dbo.Posts", new[] { "Location_LocationId" });
+            DropIndex("dbo.Posts", new[] { "CommitteeId1" });
             DropIndex("dbo.Posts", new[] { "CommitteeId" });
             DropIndex("dbo.ServerFiles", new[] { "PostId" });
             DropIndex("dbo.ServerFiles", new[] { "CommitteeId" });

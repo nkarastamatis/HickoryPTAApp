@@ -13,7 +13,7 @@ namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201410230216577_Initial"; }
+            get { return "201410230251363_Initial"; }
         }
         
         string IMigrationMetadata.Source

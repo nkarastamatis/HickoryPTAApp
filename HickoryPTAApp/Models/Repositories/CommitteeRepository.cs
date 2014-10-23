@@ -77,7 +77,7 @@ namespace HickoryPTAApp.Models
             }
         }
 
-        private void UpdatePost(CommitteePost post, string currentUser)
+        private void UpdatePost(Post post, string currentUser)
         {
             if (post.PostId == default(int))
             {
