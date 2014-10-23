@@ -26,6 +26,8 @@ namespace HickoryPTAApp.Models
         //public DbSet<PTAData.Entities.Member> Members { get; set; }
 
         //public DbSet<PTAData.Entities.Membership> Memberships { get; set; }
+        public DbSet<ServerFile> ServerFiles { get; set; }
+        public DbSet<Location> Locations { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostFile> PostFiles { get; set; }
 
@@ -46,13 +48,13 @@ namespace HickoryPTAApp.Models
         /// <param name="modelBuilder"></param>
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<PostFile>().ToTable("PostFiles");
-            modelBuilder.Entity<Post>().ToTable("Posts");
+            //modelBuilder.Entity<PostFile>().ToTable("PostFiles");
+            //modelBuilder.Entity<Post>().ToTable("Posts");
 
-            modelBuilder.Entity<Committee>().ToTable("Committees");
-            modelBuilder.Entity<CommitteeFile>().ToTable("CommitteeFiles");
-            modelBuilder.Entity<CommitteePost>().ToTable("CommitteePosts");
-            modelBuilder.Entity<CommitteeEvent>().ToTable("CommitteeEvents");
+            //modelBuilder.Entity<Committee>().ToTable("Committees");
+            //modelBuilder.Entity<CommitteeFile>().ToTable("CommitteeFiles");
+            //modelBuilder.Entity<CommitteePost>().ToTable("CommitteePosts");
+            //modelBuilder.Entity<CommitteeEvent>().ToTable("CommitteeEvents");
 
         }
     }

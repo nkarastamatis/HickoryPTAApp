@@ -8,17 +8,17 @@ namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
         public override void Up()
         {
             CreateTable(
-                "dbo.Posts",
+                "dbo.ChairPersons",
                 c => new
                     {
-                        PostId = c.Int(nullable: false, identity: true),
-                        PostTitle = c.String(),
-                        PostBody = c.String(),
-                        LastModified = c.DateTime(nullable: false),
-                        CreatedOn = c.DateTime(nullable: false),
-                        UserModified = c.String(),
+                        CommitteeId = c.Int(nullable: false),
+                        MemberId = c.Int(nullable: false),
                     })
-                .PrimaryKey(t => t.PostId);
+                .PrimaryKey(t => new { t.CommitteeId, t.MemberId })
+                .ForeignKey("dbo.Committees", t => t.CommitteeId, cascadeDelete: true)
+                .ForeignKey("dbo.Members", t => t.MemberId, cascadeDelete: true)
+                .Index(t => t.CommitteeId)
+                .Index(t => t.MemberId);
             
             CreateTable(
                 "dbo.Committees",
@@ -34,33 +34,61 @@ namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
                 .PrimaryKey(t => t.CommitteeId);
             
             CreateTable(
-                "dbo.CommitteeFiles",
+                "dbo.ServerFiles",
                 c => new
                     {
                         FileId = c.Int(nullable: false, identity: true),
-                        CommitteeId = c.Int(nullable: false),
                         FileName = c.String(),
                         Path = c.String(),
                         LastModified = c.DateTime(nullable: false),
                         CreatedOn = c.DateTime(nullable: false),
                         UserModified = c.String(),
+                        CommitteeId = c.Int(),
+                        PostId = c.Int(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
                     })
                 .PrimaryKey(t => t.FileId)
                 .ForeignKey("dbo.Committees", t => t.CommitteeId, cascadeDelete: true)
-                .Index(t => t.CommitteeId);
+                .ForeignKey("dbo.Posts", t => t.PostId, cascadeDelete: true)
+                .Index(t => t.CommitteeId)
+                .Index(t => t.PostId);
             
             CreateTable(
-                "dbo.ChairPersons",
+                "dbo.Posts",
                 c => new
                     {
-                        CommitteeId = c.Int(nullable: false),
-                        MemberId = c.Int(nullable: false),
+                        PostId = c.Int(nullable: false, identity: true),
+                        PostTitle = c.String(),
+                        PostBody = c.String(),
+                        LastModified = c.DateTime(nullable: false),
+                        CreatedOn = c.DateTime(nullable: false),
+                        UserModified = c.String(),
+                        CommitteeId = c.Int(),
+                        EventDate = c.DateTime(),
+                        Discriminator = c.String(nullable: false, maxLength: 128),
+                        Location_LocationId = c.Int(),
+                        Committee_CommitteeId = c.Int(),
                     })
-                .PrimaryKey(t => new { t.CommitteeId, t.MemberId })
-                .ForeignKey("dbo.Committees", t => t.CommitteeId, cascadeDelete: true)
-                .ForeignKey("dbo.Members", t => t.MemberId, cascadeDelete: true)
+                .PrimaryKey(t => t.PostId)
+                .ForeignKey("dbo.Locations", t => t.Location_LocationId)
+                .ForeignKey("dbo.Committees", t => t.Committee_CommitteeId)
+                .ForeignKey("dbo.Committees", t => t.CommitteeId)
                 .Index(t => t.CommitteeId)
-                .Index(t => t.MemberId);
+                .Index(t => t.Location_LocationId)
+                .Index(t => t.Committee_CommitteeId);
+            
+            CreateTable(
+                "dbo.Locations",
+                c => new
+                    {
+                        LocationId = c.Int(nullable: false, identity: true),
+                        Name = c.String(),
+                        Address_StreetAddress = c.String(),
+                        Address_City = c.String(),
+                        Address_State = c.String(),
+                        Address_Zip = c.String(),
+                    })
+                .PrimaryKey(t => t.LocationId);
             
             CreateTable(
                 "dbo.Members",
@@ -117,105 +145,39 @@ namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
                     })
                 .PrimaryKey(t => t.TeacherId);
             
-            CreateTable(
-                "dbo.PostFiles",
-                c => new
-                    {
-                        FileId = c.Int(nullable: false, identity: true),
-                        PostId = c.Int(nullable: false),
-                        FileName = c.String(),
-                        Path = c.String(),
-                        LastModified = c.DateTime(nullable: false),
-                        CreatedOn = c.DateTime(nullable: false),
-                        UserModified = c.String(),
-                    })
-                .PrimaryKey(t => t.FileId)
-                .ForeignKey("dbo.Posts", t => t.PostId, cascadeDelete: true)
-                .Index(t => t.PostId);
-            
-            CreateTable(
-                "dbo.Locations",
-                c => new
-                    {
-                        LocationId = c.Int(nullable: false, identity: true),
-                        Name = c.String(),
-                        Address_StreetAddress = c.String(),
-                        Address_City = c.String(),
-                        Address_State = c.String(),
-                        Address_Zip = c.String(),
-                    })
-                .PrimaryKey(t => t.LocationId);
-            
-            CreateTable(
-                "dbo.CommitteePosts",
-                c => new
-                    {
-                        PostId = c.Int(nullable: false),
-                        CommitteeId = c.Int(nullable: false),
-                    })
-                .PrimaryKey(t => t.PostId)
-                .ForeignKey("dbo.Posts", t => t.PostId)
-                .ForeignKey("dbo.Committees", t => t.CommitteeId, cascadeDelete: true)
-                .Index(t => t.PostId)
-                .Index(t => t.CommitteeId);
-            
-            CreateTable(
-                "dbo.CommitteeEvents",
-                c => new
-                    {
-                        PostId = c.Int(nullable: false),
-                        Committee_CommitteeId = c.Int(),
-                        Location_LocationId = c.Int(),
-                        EventDate = c.DateTime(nullable: false),
-                    })
-                .PrimaryKey(t => t.PostId)
-                .ForeignKey("dbo.CommitteePosts", t => t.PostId)
-                .ForeignKey("dbo.Committees", t => t.Committee_CommitteeId)
-                .ForeignKey("dbo.Locations", t => t.Location_LocationId)
-                .Index(t => t.PostId)
-                .Index(t => t.Committee_CommitteeId)
-                .Index(t => t.Location_LocationId);
-            
         }
         
         public override void Down()
         {
-            DropForeignKey("dbo.CommitteeEvents", "Location_LocationId", "dbo.Locations");
-            DropForeignKey("dbo.CommitteeEvents", "Committee_CommitteeId", "dbo.Committees");
-            DropForeignKey("dbo.CommitteeEvents", "PostId", "dbo.CommitteePosts");
-            DropForeignKey("dbo.CommitteePosts", "CommitteeId", "dbo.Committees");
-            DropForeignKey("dbo.CommitteePosts", "PostId", "dbo.Posts");
-            DropForeignKey("dbo.PostFiles", "PostId", "dbo.Posts");
+            DropForeignKey("dbo.ServerFiles", "PostId", "dbo.Posts");
             DropForeignKey("dbo.ChairPersons", "MemberId", "dbo.Members");
             DropForeignKey("dbo.Students", "TeacherId", "dbo.Teachers");
             DropForeignKey("dbo.Students", "MembershipId", "dbo.Memberships");
             DropForeignKey("dbo.Members", "MembershipId", "dbo.Memberships");
+            DropForeignKey("dbo.Posts", "CommitteeId", "dbo.Committees");
+            DropForeignKey("dbo.Posts", "Committee_CommitteeId", "dbo.Committees");
+            DropForeignKey("dbo.Posts", "Location_LocationId", "dbo.Locations");
             DropForeignKey("dbo.ChairPersons", "CommitteeId", "dbo.Committees");
-            DropForeignKey("dbo.CommitteeFiles", "CommitteeId", "dbo.Committees");
-            DropIndex("dbo.CommitteeEvents", new[] { "Location_LocationId" });
-            DropIndex("dbo.CommitteeEvents", new[] { "Committee_CommitteeId" });
-            DropIndex("dbo.CommitteeEvents", new[] { "PostId" });
-            DropIndex("dbo.CommitteePosts", new[] { "CommitteeId" });
-            DropIndex("dbo.CommitteePosts", new[] { "PostId" });
-            DropIndex("dbo.PostFiles", new[] { "PostId" });
+            DropForeignKey("dbo.ServerFiles", "CommitteeId", "dbo.Committees");
             DropIndex("dbo.Students", new[] { "TeacherId" });
             DropIndex("dbo.Students", new[] { "MembershipId" });
             DropIndex("dbo.Members", new[] { "MembershipId" });
+            DropIndex("dbo.Posts", new[] { "Committee_CommitteeId" });
+            DropIndex("dbo.Posts", new[] { "Location_LocationId" });
+            DropIndex("dbo.Posts", new[] { "CommitteeId" });
+            DropIndex("dbo.ServerFiles", new[] { "PostId" });
+            DropIndex("dbo.ServerFiles", new[] { "CommitteeId" });
             DropIndex("dbo.ChairPersons", new[] { "MemberId" });
             DropIndex("dbo.ChairPersons", new[] { "CommitteeId" });
-            DropIndex("dbo.CommitteeFiles", new[] { "CommitteeId" });
-            DropTable("dbo.CommitteeEvents");
-            DropTable("dbo.CommitteePosts");
-            DropTable("dbo.Locations");
-            DropTable("dbo.PostFiles");
             DropTable("dbo.Teachers");
             DropTable("dbo.Students");
             DropTable("dbo.Memberships");
             DropTable("dbo.Members");
-            DropTable("dbo.ChairPersons");
-            DropTable("dbo.CommitteeFiles");
-            DropTable("dbo.Committees");
+            DropTable("dbo.Locations");
             DropTable("dbo.Posts");
+            DropTable("dbo.ServerFiles");
+            DropTable("dbo.Committees");
+            DropTable("dbo.ChairPersons");
         }
     }
 }

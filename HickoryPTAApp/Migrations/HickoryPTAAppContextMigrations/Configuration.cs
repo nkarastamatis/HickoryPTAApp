@@ -28,6 +28,11 @@ namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
             //      new Person { FullName = "Rowan Miller" }
             //    );
             //
+
+            using (var membershipRepo = new HickoryPTAApp.Models.MemberRepository())
+            {
+                var defaultAdminMember = membershipRepo.DefaultAdminMember();
+            }
         }
     }
 }

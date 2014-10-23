@@ -206,9 +206,9 @@
       <DependentUpon>201410161503515_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\ApplicationDbContextMigrations\Configuration.cs" />
-    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410150322202_Initial.cs" />
-    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410150322202_Initial.Designer.cs">
-      <DependentUpon>201410150322202_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410230216577_Initial.cs" />
+    <Compile Include="Migrations\HickoryPTAAppContextMigrations\201410230216577_Initial.Designer.cs">
+      <DependentUpon>201410230216577_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\HickoryPTAAppContextMigrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
@@ -350,8 +350,8 @@
     <EmbeddedResource Include="Migrations\ApplicationDbContextMigrations\201410161503515_Initial.resx">
       <DependentUpon>201410161503515_Initial.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410150322202_Initial.resx">
-      <DependentUpon>201410150322202_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\HickoryPTAAppContextMigrations\201410230216577_Initial.resx">
+      <DependentUpon>201410230216577_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <PropertyGroup>
