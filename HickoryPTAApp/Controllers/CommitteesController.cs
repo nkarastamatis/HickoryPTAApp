@@ -129,6 +129,7 @@ namespace HickoryPTAApp.Controllers
             var possibleChairs = UserManager.Users.Where(u => userIds.Contains(u.Id)).ToList();
             ViewBag.PossibleChairs = possibleChairs;
             HttpContext.Cache.Insert("PossibleChairs", possibleChairs);
+
             return View(committeeRepository.Find(id));
         }
 
@@ -150,10 +151,12 @@ namespace HickoryPTAApp.Controllers
                 {
                     case "Save":
                         return Save(committee);
-                    case "AddCommittePost":
+                    case "Add Committe Post":
                         return AddCommitteePost(committee);
-                    case "AddCommitteChair":
+                    case "Add Committe Chair":
                         return AddCommitteeChair(committee);
+                    case "Add Committe Event":
+                        return AddCommitteeEvent(committee);
                     default:
                         return View();
                 }
@@ -175,6 +178,14 @@ namespace HickoryPTAApp.Controllers
             if (committee.Posts == null)
                 committee.Posts = new List<CommitteePost>();
             committee.Posts.Add(new CommitteePost());
+            return View(committee);
+        }
+
+        private ActionResult AddCommitteeEvent(Committee committee)
+        {
+            if (committee.Events == null)
+                committee.Events = new List<CommitteeEvent>();
+            committee.Events.Add(new CommitteeEvent() { EventDate = DateTime.Now });
             return View(committee);
         }
 

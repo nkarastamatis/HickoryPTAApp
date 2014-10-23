@@ -19,7 +19,7 @@ namespace PTAData.Entities
     {
         public int CommitteeId { get; set; }
         public string CommitteeName { get; set; }
-        [DataType(DataType.MultilineText)]
+        
         public string Description { get; set; }
 
         public virtual ICollection<ChairPerson> ChairPersons { get; set; }
@@ -39,12 +39,20 @@ namespace PTAData.Entities
         public void UpdateForeignKeys()
         {
             if (ChairPersons != null)
-            foreach (var chair in ChairPersons)
-                chair.CommitteeId = CommitteeId;
+                foreach (var chair in ChairPersons)
+                    chair.CommitteeId = CommitteeId;
 
             if (Posts != null)
-            foreach (var post in Posts)
-                post.CommitteeId = CommitteeId;
+                foreach (var post in Posts)
+                    post.CommitteeId = CommitteeId;
+
+            if (Events != null)
+                foreach (var e in Events)
+                    e.CommitteeId = CommitteeId;
+
+            if (AttachedFiles != null)
+                foreach (var file in AttachedFiles)
+                    file.CommitteeId = CommitteeId;
         }
 
         private void Initialize()

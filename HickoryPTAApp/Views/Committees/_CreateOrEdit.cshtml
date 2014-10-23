@@ -16,12 +16,24 @@
 </div>
 
 <div class="form-group">
-    @Html.LabelFor(model => model.ChairPersons, new { @class = "col-md-12" })
+    @Html.LabelFor(model => model.ChairPersons, "Chairs", new { @class = "col-md-12" })
     @Html.EditorFor(model => model.ChairPersons)       
 </div>
 <div class="form-group">
     <div class="col-md-10">
-        <input type="submit" name="Command" value="AddCommitteChair" class="btn btn-default" />
+        <input type="submit" name="Command" value="Add Committe Chair" class="btn btn-default" />
+    </div>
+</div>
+
+<fieldset>
+    <legend>
+        @Html.LabelFor(model => model.Events)
+    </legend>
+    @Html.EditorFor(model => model.Events)
+</fieldset>
+<div class="form-group">
+    <div class="col-md-10">
+        <input type="submit" name="Command" value="Add Committe Event" class="btn btn-default" />
     </div>
 </div>
 
@@ -34,7 +46,7 @@
 
 <div class="form-group">
     <div class="col-md-10">
-        <input type="submit" name="Command" value="AddCommittePost" class="btn btn-default" />
+        <input type="submit" name="Command" value="Add Committe Post" class="btn btn-default" />
     </div>
 </div>
 
@@ -42,4 +54,4 @@
 @Html.HiddenFor(model => model.LastModified)
 @Html.HiddenFor(model => model.UserModified)
 @Html.HiddenFor(model => model.CreatedOn)*@
-@Html.HiddenFor(model => model.CreatedOn)
+@Html.HiddenFor(model => model.CreatedOn.Date)

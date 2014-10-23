@@ -3,6 +3,7 @@
 @{
     var possibleChairs = ViewBag.PossibleChairs as List<HickoryPTAApp.Models.ApplicationUser>;  
 } 
+<div class="col-md-6">
     @Html.DropDownListFor(model => model.MemberId, possibleChairs.Select(option => new SelectListItem
         {
             Text = option.Member.Name.ToString(),
@@ -12,3 +13,4 @@
         "Choose...",
         new { @class = "form-control" })
     @Html.ValidationMessageFor(model => model.MemberId)
+</div>

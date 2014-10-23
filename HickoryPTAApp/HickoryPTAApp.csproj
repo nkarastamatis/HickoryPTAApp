@@ -236,6 +236,8 @@
     <Content Include="Notes\Packages.txt" />
     <Content Include="Scripts\ai.js" />
     <Content Include="Scripts\ai.min.js" />
+    <Content Include="Scripts\bootstrap-datepicker.js" />
+    <Content Include="Scripts\bootstrap-timepicker.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config" />
@@ -325,6 +327,8 @@
     <Content Include="Views\Posts\_CreateOrEdit.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\TextArea.cshtml" />
     <Content Include="Views\Committees\EditorTemplates\ChairPerson.cshtml" />
+    <Content Include="Views\Committees\EditorTemplates\CommitteeEvent.cshtml" />
+    <Content Include="Views\Committees\EditorTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

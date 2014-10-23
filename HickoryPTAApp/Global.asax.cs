@@ -16,6 +16,9 @@ namespace HickoryPTAApp
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            ModelBinders.Binders[typeof(DateTime)] =
+                new PTAData.DateAndTimeModelBinder() { Date = "Date", Time = "Time" };
         }
     }
 }
