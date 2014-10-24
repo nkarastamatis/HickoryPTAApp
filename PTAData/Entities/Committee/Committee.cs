@@ -22,10 +22,10 @@ namespace PTAData.Entities
         
         public string Description { get; set; }
 
-        public virtual ICollection<ChairPerson> ChairPersons { get; set; }
-        public virtual ICollection<CommitteeFile> AttachedFiles { get; set; }
-        public virtual ICollection<CommitteePost> Posts { get; set; }
-        public virtual ICollection<CommitteeEvent> Events { get; set; }
+        public virtual IList<ChairPerson> ChairPersons { get; set; }
+        public virtual IList<CommitteeFile> AttachedFiles { get; set; }
+        public virtual IList<CommitteePost> Posts { get; set; }
+        public virtual IList<CommitteeEvent> Events { get; set; }
 
 
         public Committee()
@@ -60,6 +60,22 @@ namespace PTAData.Entities
             //ChairPersons = new List<ChairPerson>();
             //AttachedFiles = new List<CommitteeFile>();
             //Entries = new List<CommitteeEntry>();
+        }
+
+        public void SortPosts()
+        {
+            if (Posts != null)
+            {
+                Posts.OrderByDescending(p => p.CreatedOn);
+            }
+        }
+
+        public void SortEvents()
+        {
+            if (Events != null)
+            {
+                Events = Events.OrderBy(e => e.EventDate).ToList();
+            }
         }
 
         public DateTime LastModified { get; set; }

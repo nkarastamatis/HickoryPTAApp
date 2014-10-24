@@ -42,44 +42,37 @@
                     {
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <div class="panel-title">
-                                    <a data-toggle="collapse" data-parent="accordionEvents" href="#collapse@(evnt.PostId)">
-                                        <table class="table">
-                                            <tbody>
-                                                <tr>
-                                                    <td style="border-top:none; padding:0px">
-                                                        <h4>@evnt.PostTitle</h4>
-                                                    </td>
-                                                    <td style="border-top:none; padding:0px">
-                                                        <h4 class="text-right">@evnt.EventDate.ToShortDateString()</h4>
-                                                        <h4 class="text-right">@evnt.EventDate.ToShortTimeString()</h4>
-                                                    </td>
-                                                </tr>
+                                <a style="color:white" data-toggle="collapse" data-parent="accordionEvents" href="#collapse@(evnt.PostId)">
+                                    <h4 class="panel-title" style="color:white">
 
-                                                <tr>
-                                                    <td style="border-top:none; padding:0px">
-                                                        @{
-                                                            var locationName = evnt.Location != null ? evnt.Location.Name : "Here ";
-
-                                                            if (locationName != null)
-                                                            {
-                                                                        <h4>@locationName</h4>
-                                                            }
-
-                                                        }
-
-                                                    </td>
-
-                                                </tr>
-                                            </tbody>
-
-                                        </table>
-                                    </a>
-                                </div>
+                                        <span>@evnt.PostTitle</span>
+                                        <span class="pull-right">@evnt.EventDate.ToShortDateString()</span>
+                                    </h4>
+                                </a>
                             </div>
 
                             <div id="collapse@(evnt.PostId)" class="panel-collapse collapse in">
                                 <div class="panel-body">
+                                    @{
+                                        var locationName = evnt.Location != null ? evnt.Location.Name : " ";
+
+                                        if (evnt.Location != null)
+                                        {
+                                            <p>
+
+                                            <address>
+                                                <span>Location: <strong>@locationName</strong></span><br />
+                                                @if (evnt.Location.Address != null)
+                                                {
+                                                    var address = evnt.Location.Address;
+                                                    <span>@address.StreetAddress</span><br />
+                                                    <span>@address.City, @address.State  @address.Zip</span>                                                    
+                                                }
+                                            </address>
+                                            </p>
+                                        }
+                                    }
+
                                     @evnt.PostBody
                                 </div>
                             </div>
@@ -97,11 +90,11 @@
                     {
                         <div class="panel panel-primary">
                             <div class="panel-heading">
-                                <h4 class="panel-title">
-                                    <a data-toggle="collapse" data-parent="accordionPosts" href="#collapse@(post.PostId)">
+                                <a style="color:white" data-toggle="collapse" data-parent="accordionPosts" href="#collapse@(post.PostId)">
+                                    <h4 style="color:white" class="panel-title">
                                         @post.PostTitle
-                                    </a>
-                                </h4>
+                                    </h4>
+                                </a>
                             </div>
 
                             <div id="collapse@(post.PostId)" class="panel-collapse collapse in">
@@ -114,25 +107,6 @@
                 </div>
             </fieldset>
 
-            <div class="table-responsive">
-                <table class="table table-condensed table-striped">
-                    <thead>
-                        <tr>
-                            <td>Attachment</td>
-                            <td></td>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @*<asp:Repeater ID="AttachedFiles">
-                            <itemtemplate>
-                                <tr>
-                                    <td><%# Container.DataItem as string %></td>
-                                </tr>
-                            </itemtemplate>
-                        </asp:Repeater>*@
-                    ></tbody>
-                </table>
-            </div>
         </div>
 
         <!--/End Main Content Area here-->

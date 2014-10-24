@@ -12,6 +12,6 @@ namespace PTAData.Entities
         public int CommitteeId { get; set; }
         public virtual Committee Committee { get; set; }
         public DateTime EventDate { get; set; }
-        public Location Location { get; set; }
+        public virtual Location Location { get; set; }
     }
 }

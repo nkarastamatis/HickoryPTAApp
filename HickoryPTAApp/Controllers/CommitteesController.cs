@@ -73,6 +73,9 @@ namespace HickoryPTAApp.Controllers
             var committee = committeeRepository.Find(id);
             if (committee == null)
                 return RedirectToAction("Index", "Home");
+
+            committee.SortPosts();
+            committee.SortEvents();
             return View(committee);
         }
 
@@ -130,7 +133,9 @@ namespace HickoryPTAApp.Controllers
             ViewBag.PossibleChairs = possibleChairs;
             HttpContext.Cache.Insert("PossibleChairs", possibleChairs);
 
-            return View(committeeRepository.Find(id));
+            var committee = committeeRepository.Find(id);
+
+            return View(committee);
         }
 
         private void RemovedCallback(string key, object value, CacheItemRemovedReason reason)
