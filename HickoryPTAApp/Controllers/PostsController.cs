@@ -42,6 +42,31 @@ namespace HickoryPTAApp.Controllers
             }
         }
 
+        public ActionResult Create(string Type, string CommitteeId)
+        {
+            Type postType = Type == "CommitteePost" ? typeof(CommitteePost) : typeof(CommitteeEvent);
+            var obj = Activator.CreateInstance(postType);
+            var propInfo = postType.GetProperty("CommitteeId");
+            propInfo.SetValue(obj, System.Convert.ToInt32(CommitteeId));
+            return View(obj);
+        }
+
+        [HttpPost]
+        public ActionResult Create(CommitteePost post, CommitteeEvent evt)
+        {
+            if (ModelState.IsValid)
+            {
+                if (evt.Location == null)
+                    return Save(post);
+                else
+                    return Save(evt);
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         //
         // GET: /Posts/Edit/5
 
@@ -54,11 +79,14 @@ namespace HickoryPTAApp.Controllers
         // POST: /Posts/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(Post post)
+        public ActionResult Edit(CommitteePost post, CommitteeEvent evt)
         {
             if (ModelState.IsValid)
             {
-                return Save(post);
+                if (evt.Location == null)
+                    return Save(post);
+                else
+                    return Save(evt);
             }
             else
             {
@@ -70,7 +98,11 @@ namespace HickoryPTAApp.Controllers
         {
             postRepository.InsertOrUpdate(post, CurrentUser);
             postRepository.Save();
-            return RedirectToAction("Index");
+            var committeeId =
+                post is CommitteeEvent ?
+                (post as CommitteeEvent).CommitteeId :
+                (post as CommitteePost).CommitteeId;
+            return RedirectToAction("Pages", "Committees", new { id = committeeId });
         }
 
 
@@ -86,12 +118,15 @@ namespace HickoryPTAApp.Controllers
         // POST: /Posts/Delete/5
 
         [HttpPost, ActionName("Delete")]
-        public ActionResult DeleteConfirmed(int id)
+        public ActionResult DeleteConfirmed(int id, string PreviousUrl)
         {
             postRepository.Delete(id);
             postRepository.Save();
 
-            return RedirectToAction("Index");
+            if (String.IsNullOrEmpty(PreviousUrl))
+                return RedirectToAction("Index", "Home");
+            else
+                return Redirect(PreviousUrl);
         }
 
         protected override void Dispose(bool disposing)

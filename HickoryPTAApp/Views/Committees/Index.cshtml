@@ -9,20 +9,20 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
+<table class="table table-condensed">
     <tr>
         <th></th>
         <th>
             CommitteeName
         </th>
         <th>
-            Description
-        </th>
-        <th>
             ChairPersons
         </th>
         <th>
             AttachedFiles
+        </th>
+        <th>
+            Events
         </th>
         <th>
             Posts
@@ -49,13 +49,13 @@
 			@item.CommitteeName
         </td>
         <td>
-			@item.Description
-        </td>
-        <td>
 			@(item.ChairPersons == null ? "None" : item.ChairPersons.Count.ToString())
         </td>
         <td>
 			@(item.AttachedFiles == null ? "None" : item.AttachedFiles.Count.ToString())
+        </td>
+        <td>
+            @(item.Events == null ? "None" : item.Events.Count.ToString())
         </td>
         <td>
 			@(item.Posts == null ? "None" : item.Posts.Count.ToString())

@@ -61,7 +61,8 @@ namespace HickoryPTAApp.Controllers
             return View(committeeRepository.AllIncluding(
                 c => c.ChairPersons,
                 c => c.Posts,
-                c => c.AttachedFiles));
+                c => c.AttachedFiles,
+                c => c.Events));
         }
 
         //
@@ -182,6 +183,8 @@ namespace HickoryPTAApp.Controllers
         {
             if (committee.Posts == null)
                 committee.Posts = new List<CommitteePost>();
+
+            return RedirectToAction("Create", "Posts", new {Type = "CommitteePost", CommitteeId = committee.CommitteeId});
             committee.Posts.Add(new CommitteePost());
             return View(committee);
         }

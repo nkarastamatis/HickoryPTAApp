@@ -329,6 +329,7 @@
     <Content Include="Views\Committees\EditorTemplates\ChairPerson.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\CommitteeEvent.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
+    <Content Include="Views\Posts\Create.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
