@@ -7,7 +7,8 @@ using PTAData.Entities;
 using HickoryPTAApp.Models;
 
 namespace HickoryPTAApp.Controllers
-{   
+{
+    [Authorize(Roles = AdminConstants.Roles.Administrator)]
     public class MembershipsController : Controller
     {
 		private readonly IMembershipRepository membershipRepository;

@@ -12,7 +12,8 @@ using System.Web.Caching;
 
 namespace HickoryPTAApp.Controllers
 {
-    [Authorize(Roles = AdminConstants.Roles.Administrator)]
+    [Authorize(Roles =
+        AdminConstants.Roles.BoardMember + "," + AdminConstants.Roles.Administrator)]
     public class CommitteesController : Controller
     {
 		private readonly ICommitteeRepository committeeRepository;
@@ -121,7 +122,11 @@ namespace HickoryPTAApp.Controllers
 
         //
         // GET: /Committees/Edit/5
- 
+
+        [Authorize(Roles =
+            AdminConstants.Roles.CommitteeChair + "," +
+            AdminConstants.Roles.BoardMember + "," +
+            AdminConstants.Roles.Administrator)]
         public ActionResult Edit(int id)
         {
             var userIds = 
@@ -148,6 +153,10 @@ namespace HickoryPTAApp.Controllers
         // POST: /Committees/Edit/5
 
         [HttpPost]
+        [Authorize(Roles =
+            AdminConstants.Roles.CommitteeChair + "," +
+            AdminConstants.Roles.BoardMember + "," +
+            AdminConstants.Roles.Administrator)]
         public ActionResult Edit(Committee committee, string Command)
         {
             var cache = new System.Web.Caching.Cache();

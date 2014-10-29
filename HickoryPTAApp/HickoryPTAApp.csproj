@@ -228,6 +228,14 @@
     <Content Include="Content\bootstrap\bootstrap.css" />
     <Content Include="Content\bootstrap\bootstrap.min.css" />
     <Content Include="Content\bootstrap\datepicker.css" />
+    <Content Include="Content\bootstrap\Kickstrap\bootstrap.css" />
+    <Content Include="Content\bootstrap\Kickstrap\bootstrap.min.css" />
+    <Content Include="Content\images\clipart-squirrel.gif" />
+    <Content Include="Content\images\hickoryschool.jpg" />
+    <Content Include="Content\images\squirrel-20140924-favicon.ico" />
+    <Content Include="Content\images\squirrel-small.gif" />
+    <Content Include="Content\images\squirrel.gif" />
+    <Content Include="Content\images\VS2013.3.exe" />
     <Content Include="favicon.ico" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -243,6 +251,8 @@
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config" />
     <Content Include="Content\bootstrap\datepicker.min.css" />
+    <Content Include="Content\bootstrap\Kickstrap\variables.less" />
+    <Content Include="Content\images\Thumbs.db" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -333,6 +343,8 @@
     <Content Include="Views\Shared\EditorTemplates\DateTime.cshtml" />
     <Content Include="Views\Posts\Create.cshtml" />
     <Content Include="Views\Shared\_EventsPartial.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\CommitteeEvent.cshtml" />
+    <Content Include="Views\Posts\Details.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

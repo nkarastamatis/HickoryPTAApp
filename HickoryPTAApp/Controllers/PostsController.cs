@@ -68,6 +68,14 @@ namespace HickoryPTAApp.Controllers
         }
 
         //
+        // GET: /Posts/Details/5
+        [AllowAnonymous]
+        public ViewResult Details(int id)
+        {
+            return View(postRepository.Find(id));
+        }
+
+        //
         // GET: /Posts/Edit/5
 
         public ActionResult Edit(int id)

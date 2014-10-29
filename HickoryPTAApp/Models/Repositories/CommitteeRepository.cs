@@ -142,6 +142,25 @@ namespace HickoryPTAApp.Models
         {
             context.Dispose();
         }
+
+        internal Committee GlobalPtaCommittee()
+        {
+            var globalPtaCommittee = All.FirstOrDefault(m => m.CommitteeName == "PTA");
+
+            if (globalPtaCommittee == null)
+            {
+                globalPtaCommittee = new Committee()
+                {
+                    CommitteeName = "PTA",
+                    Description = "Hickory Elementary PTA"
+                };
+
+                InsertOrUpdate(globalPtaCommittee, "Seed");
+                Save();
+            }
+
+            return globalPtaCommittee;
+        }
     }
 
     public interface ICommitteeRepository : IDisposable

@@ -75,6 +75,7 @@ namespace HickoryPTAApp.Models
                 defaultAdminMembership = new Membership()
                 {
                     Address = new Address() { StreetAddress = "Admin" },
+                    Type = Membership.MembershipType.Admin
                 };
 
                 InsertOrUpdate(defaultAdminMembership);

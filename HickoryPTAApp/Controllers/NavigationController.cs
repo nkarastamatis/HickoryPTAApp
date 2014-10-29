@@ -28,8 +28,6 @@ namespace HickoryPTAApp.Controllers
         {
             var navModel = new NavigationViewModel();
            
-            navModel.NavigationCommittees.Add(new NavigationCommittee() { CommitteeId = 1, CommitteeName = "Test" });
-
             navModel.NavigationCommittees.AddRange(
                 committeeRepository
                 .All

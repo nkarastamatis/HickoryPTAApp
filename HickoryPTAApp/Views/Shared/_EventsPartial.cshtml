@@ -2,27 +2,29 @@
 
 @if (Model != null && Model.Count() > 0)
 {
-    <h4>Events</h4>
-        <table class="table table-condensed">
-            <thead>
-                <tr>
-                    <td>Title</td>
-                    <td>Date</td>
-                    <td>Location</td>
-                </tr>
-            </thead>
-            <tbody>
-    @foreach(var evt in Model)
-    {
-                <tr>
-                    <td>@evt.PostTitle</td>
-                    <td>@evt.EventDate.ToShortDateString()</td>
-                    @{ var location = evt.Location != null ? evt.Location.Name : "";}
-                    <td>@location</td>
-                </tr>
-    }
-            </tbody>
-        </table>
+    <h2>Upcoming Events</h2>
+    <table class="table table-condensed">
+        <thead>
+            <tr>
+                <td>Title</td>
+                <td>Date</td>
+                <td>Location</td>
+                <td>Committee</td>
+            </tr>
+        </thead>
+        <tbody>
+        @foreach(var evt in Model)
+        {
+            <tr>
+                <td>@Html.ActionLink(@evt.PostTitle, "Details", "Posts", new { id = @evt.PostId}, null)</td>
+                <td>@evt.EventDate.ToShortDateString()</td>
+                @{ var location = evt.Location != null ? evt.Location.Name : "";}
+                <td>@location</td>
+                <td>@evt.Committee.CommitteeName</td>
+            </tr>
+        }
+        </tbody>
+    </table>
     
 }
 

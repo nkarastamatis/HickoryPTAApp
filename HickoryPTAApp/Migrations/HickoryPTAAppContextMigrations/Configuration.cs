@@ -27,7 +27,11 @@ namespace HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations
             //      new Person { FullName = "Brice Lambson" },
             //      new Person { FullName = "Rowan Miller" }
             //    );
-            //
+            
+            using (var committeeRepo = new HickoryPTAApp.Models.CommitteeRepository())
+            {
+                var globalPtaCommittee = committeeRepo.GlobalPtaCommittee();
+            }
 
             using (var membershipRepo = new HickoryPTAApp.Models.MemberRepository())
             {

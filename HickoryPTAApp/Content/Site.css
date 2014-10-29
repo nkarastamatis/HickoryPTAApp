@@ -22,6 +22,9 @@ select {
     max-width: 280px;
 }
 
+.display-label {
+    font-weight: bold
+}
 
 /* From custom.css 2-column.html of www.html5templatesdreamweaver.com */
 .divPanel {}

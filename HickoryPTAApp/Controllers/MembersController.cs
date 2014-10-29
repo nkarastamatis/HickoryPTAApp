@@ -11,7 +11,9 @@ using Microsoft.AspNet.Identity.Owin;
 
 
 namespace HickoryPTAApp.Controllers
-{   
+{
+    [Authorize(Roles =
+        AdminConstants.Roles.BoardMember + "," + AdminConstants.Roles.Administrator)]
     public class MembersController : Controller
     {
 		private readonly IMembershipRepository membershipRepository;
@@ -94,7 +96,7 @@ namespace HickoryPTAApp.Controllers
 
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        private async Task<ActionResult> AddUser(Member member)
+        private ActionResult AddUser(Member member)
         {
             var user = new ApplicationUser { UserName = member.Email, Email = member.Email };
             IdentityResult result = new IdentityResult();
@@ -102,6 +104,9 @@ namespace HickoryPTAApp.Controllers
             {
                 user.MemberId = member.MemberId;
                 result = UserManager.Create(user, "Hickory1");
+                // below I was going to send an email to the users as the accounts were created
+                // but for now I'm just going to return
+                return null;
             }
             catch (Exception ex)
             {
