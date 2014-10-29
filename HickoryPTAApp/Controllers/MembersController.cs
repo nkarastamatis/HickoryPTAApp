@@ -82,7 +82,7 @@ namespace HickoryPTAApp.Controllers
 
                 var membership = membershipRepository.Find(member.MembershipId);
                 if (membership != null &&
-                    membership.Address.StreetAddress == "PTA Chairs")
+                    membership.Type == Membership.MembershipType.Admin)
                 {
                     AddUser(member);
                 }

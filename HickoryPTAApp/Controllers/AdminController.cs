@@ -94,20 +94,24 @@ namespace HickoryPTAApp.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Users(AdminUsersViewModel model, string[] SelectedRoles)
+        public async Task<ActionResult> Users(AdminUsersViewModel model, string[] SelectedRoles, string Command)
         {
             GetUsersAndRoles(model);
 
-            if (SelectedRoles != null && !String.IsNullOrEmpty(model.SelectedUserId))
+            if (Command == "Save")
             {
-                foreach (var selectedRole in SelectedRoles)
+                foreach (var role in model.Roles)
                 {
+                    if (SelectedRoles != null && SelectedRoles.Contains(role.Name))
                     {
-                        if (!UserManager.IsInRole(model.SelectedUserId, selectedRole))
-                            UserManager.AddToRole(model.SelectedUserId, selectedRole);
+                        if (!UserManager.IsInRole(model.SelectedUserId, role.Name))
+                            UserManager.AddToRole(model.SelectedUserId, role.Name);
+                    }
+                    else if (UserManager.IsInRole(model.SelectedUserId, role.Name))
+                    {
+                        UserManager.RemoveFromRole(model.SelectedUserId, role.Name);
                     }
                 }
-                //var r = UserManager.Update(model.Users.FirstOrDefault(u => u.Id == model.SelectedUserId));
             }
 
             if (ModelState.IsValid)
