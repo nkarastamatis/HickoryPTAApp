@@ -94,22 +94,16 @@ namespace HickoryPTAApp.Controllers
 
         public ActionResult Create()
         {
-            return View();
+            return View(new Committee());
         } 
 
         //
         // POST: /Committees/Create
 
         [HttpPost]
-        public ActionResult Create(Committee committee)
+        public ActionResult Create(Committee committee, string Command)
         {          
-            if (ModelState.IsValid) {
-                committeeRepository.InsertOrUpdate(committee, CurrentUser);
-                committeeRepository.Save();
-                return RedirectToAction("Index");
-            } else {
-				return View();
-			}
+            return EditOrCreate(committee, Command);
         }
 
         public string CurrentUser
@@ -129,15 +123,7 @@ namespace HickoryPTAApp.Controllers
             AdminConstants.Roles.Administrator)]
         public ActionResult Edit(int id)
         {
-            var userIds = 
-                RoleManager
-                .FindByName(AdminConstants.Roles.CommitteeChair)
-                .Users
-                .Select(u => u.UserId)
-                .ToList();
-            var possibleChairs = UserManager.Users.Where(u => userIds.Contains(u.Id)).ToList();
-            ViewBag.PossibleChairs = possibleChairs;
-            HttpContext.Cache.Insert("PossibleChairs", possibleChairs);
+            ViewBag.PossibleChairs = PossibleChairs;
 
             var committee = committeeRepository.Find(id);
 
@@ -147,6 +133,28 @@ namespace HickoryPTAApp.Controllers
         private void RemovedCallback(string key, object value, CacheItemRemovedReason reason)
         {
             
+        }
+
+        private object PossibleChairs
+        {
+            get
+            {
+                var cache = new System.Web.Caching.Cache();
+                var possibleChairs = HttpContext.Cache.Get("PossibleChairs");
+                if (possibleChairs == null)
+                {
+                    var userIds =
+                        RoleManager
+                        .FindByName(AdminConstants.Roles.CommitteeChair)
+                        .Users
+                        .Select(u => u.UserId)
+                        .ToList();
+                    possibleChairs = UserManager.Users.Where(u => userIds.Contains(u.Id)).ToList();
+                    HttpContext.Cache.Insert("PossibleChairs", possibleChairs);
+                }
+
+                return possibleChairs;
+            }
         }
 
         //
@@ -159,26 +167,38 @@ namespace HickoryPTAApp.Controllers
             AdminConstants.Roles.Administrator)]
         public ActionResult Edit(Committee committee, string Command)
         {
-            var cache = new System.Web.Caching.Cache();
-            ViewBag.PossibleChairs = HttpContext.Cache.Get("PossibleChairs");
-            if (ModelState.IsValid) {
+            return EditOrCreate(committee, Command);
+        }
+
+        private ActionResult EditOrCreate(Committee committee, string Command)
+        {
+            ViewBag.PossibleChairs = PossibleChairs;
+
+            switch (Command)
+            {
+                case "Add Committe Post":
+                    return AddCommitteePost(committee);
+                case "Add Committe Chair":
+                    return AddCommitteeChair(committee);
+                case "Add Committe Event":
+                    return AddCommitteeEvent(committee);
+            }
+
+            if (ModelState.IsValid)
+            {
                 switch (Command)
                 {
                     case "Save":
                         return Save(committee);
-                    case "Add Committe Post":
-                        return AddCommitteePost(committee);
-                    case "Add Committe Chair":
-                        return AddCommitteeChair(committee);
-                    case "Add Committe Event":
-                        return AddCommitteeEvent(committee);
                     default:
                         return View();
                 }
-                
-            } else {
-				return View();
-			}
+
+            }
+            else
+            {
+                return View();
+            }
         }
 
         private ActionResult Save(Committee committee)
