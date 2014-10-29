@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using PTAData.Entities;
+using System.Data.Entity;
 
 namespace HickoryPTAApp.Controllers
 {
@@ -26,6 +28,27 @@ namespace HickoryPTAApp.Controllers
             ViewBag.Message = "Your contact page.";
 
             return View();
+        }
+
+        [ChildActionOnly]
+        public ActionResult Events()
+        {
+            var events = new List<CommitteeEvent>();
+
+            using (var context = new HickoryPTAApp.Models.HickoryPTAAppContext())
+            {
+                IQueryable<CommitteeEvent> query = context.CommitteeEvents;
+                events.AddRange(
+                    query
+                    .Include(e => e.Committee)
+                    .Include(e => e.Location)
+                    .OrderBy(e => e.EventDate)
+                    .Where(e => e.EventDate >= DateTime.Today)
+                    .Take(10)
+                    .ToList());
+            }
+
+            return PartialView("_EventsPartial", events);
         }
     }
 }
