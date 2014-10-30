@@ -8,9 +8,21 @@
     {
         <div class="display-label">Location</div>
         <div class="display-field">@Model.Location.Name</div>
-        <div class="display-field">@Model.Location.Address.StreetAddress</div>
-        <div class="display-field">@Model.Location.Address.City, @Model.Location.Address.State  @Model.Location.Address.Zip</div>    
+        if (Model.Location.Address != null && !String.IsNullOrEmpty(Model.Location.Address.StreetAddress))
+        {
+            <div class="display-field">@Model.Location.Address.StreetAddress</div>
+        }
+        if (Model.Location.Address != null && !String.IsNullOrEmpty(Model.Location.Address.City))
+        {
+            <div class="display-field">@Model.Location.Address.City, @Model.Location.Address.State  @Model.Location.Address.Zip</div>    
+        }
     }
+    <br />
+    <div class="display-label">Date</div>
+    <div class="display-field">@Model.EventDate.ToShortDateString()</div>
+    <br />
+    <div class="display-label">Time</div>
+    <div class="display-field">@Model.EventDate.ToShortTimeString()</div>
     <br />
     <div class="display-label">Description</div>
     <div class="display-field">@Model.PostBody</div>
