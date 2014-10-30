@@ -221,6 +221,7 @@ namespace HickoryPTAApp.Controllers
         {
             if (committee.Events == null)
                 committee.Events = new List<CommitteeEvent>();
+            return RedirectToAction("Create", "Posts", new { Type = "CommitteeEvent", CommitteeId = committee.CommitteeId });
             committee.Events.Add(new CommitteeEvent() { EventDate = DateTime.Now });
             return View(committee);
         }

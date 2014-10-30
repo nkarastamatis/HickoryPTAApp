@@ -48,6 +48,11 @@ namespace HickoryPTAApp.Controllers
             var obj = Activator.CreateInstance(postType);
             var propInfo = postType.GetProperty("CommitteeId");
             propInfo.SetValue(obj, System.Convert.ToInt32(CommitteeId));
+
+            var evt = obj as CommitteeEvent;
+            if (evt != null)
+                evt.EventDate = DateTime.Now;
+
             return View(obj);
         }
 
@@ -63,7 +68,10 @@ namespace HickoryPTAApp.Controllers
             }
             else
             {
-                return View();
+                if (evt.Location == null)
+                    return View(post);
+                else
+                    return View(evt);
             }
         }
 

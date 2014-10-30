@@ -65,8 +65,14 @@
                                                 @if (evnt.Location.Address != null)
                                                 {
                                                     var address = evnt.Location.Address;
-                                                    <span>@address.StreetAddress</span><br />
-                                                    <span>@address.City, @address.State  @address.Zip</span>                                                    
+                                                    if (!String.IsNullOrEmpty(address.StreetAddress))
+                                                    {
+                                                        <span>@address.StreetAddress</span><br />
+                                                    }
+                                                    if (!String.IsNullOrEmpty(address.City))
+                                                    {
+                                                        <span>@address.City, @address.State  @address.Zip</span>                                                                                                            
+                                                    }
                                                 }
                                             </address>
                                             </p>
