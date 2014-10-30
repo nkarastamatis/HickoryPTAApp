@@ -25,6 +25,12 @@
     </div>
 </div>
 
+
+<div class="form-group">
+    @*@Html.EditorFor(model => model.AttachedFiles[0].PostedFile)*@
+    <input type="file" name="File" id="File" />
+</div>
+
 <fieldset>
     <legend>
         @Html.LabelFor(model => model.Events)

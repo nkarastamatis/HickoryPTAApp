@@ -11,7 +11,7 @@ namespace HickoryPTAApp.Extentions
     {
         public static MvcForm BeginHorizontalForm(this HtmlHelper helper)
         {
-            return helper.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", role="form" });
+            return helper.BeginForm(null, null, FormMethod.Post, new { @class = "form-horizontal", role = "form", enctype = "multipart/form-data" });
         }
     }
 }

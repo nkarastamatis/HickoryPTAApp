@@ -126,7 +126,6 @@ namespace HickoryPTAApp.Controllers
             ViewBag.PossibleChairs = PossibleChairs;
 
             var committee = committeeRepository.Find(id);
-
             return View(committee);
         }
 
@@ -165,7 +164,7 @@ namespace HickoryPTAApp.Controllers
             AdminConstants.Roles.CommitteeChair + "," +
             AdminConstants.Roles.BoardMember + "," +
             AdminConstants.Roles.Administrator)]
-        public ActionResult Edit(Committee committee, string Command)
+        public ActionResult Edit(Committee committee, string Command, HttpPostedFileBase File)
         {
             return EditOrCreate(committee, Command);
         }
