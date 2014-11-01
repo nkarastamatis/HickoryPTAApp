@@ -126,7 +126,9 @@ namespace HickoryPTAApp.Controllers
 
         private void GetUsersAndRoles(AdminUsersViewModel model)
         {
-            model.Users = UserManager.Users.Include(u => u.Roles);
+            model.Users = UserManager.Users
+                .Include(u => u.Roles)
+                .Include(u => u.Member);
             model.Roles = RoleManager.Roles.ToList();
         }
 

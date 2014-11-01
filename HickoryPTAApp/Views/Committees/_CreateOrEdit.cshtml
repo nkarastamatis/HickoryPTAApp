@@ -25,10 +25,13 @@
     </div>
 </div>
 
-
+@if (Model.CommitteeId != 0)
+{
+    
 <div class="form-group">
     @*@Html.EditorFor(model => model.AttachedFiles[0].PostedFile)*@
-    <input type="file" name="File" id="File" />
+    <input type="file" name="File" id="File" class="form-control" />
+    <span class="btn btn-file">Upload<input type="file" /></span>
 </div>
 
 <fieldset>
@@ -110,6 +113,7 @@
         <input type="submit" name="Command" value="Add Committe Post" class="btn btn-default" />
     </div>
 </div>
+}
 
 @*@Html.HiddenFor(model => model.CommitteeId)
 @Html.HiddenFor(model => model.LastModified)

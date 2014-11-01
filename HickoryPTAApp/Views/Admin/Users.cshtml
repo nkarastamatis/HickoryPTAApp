@@ -21,7 +21,7 @@
     <div class="form-group">
     @Html.DropDownListFor(model => model.SelectedUserId, Model.Users.Select(option => new SelectListItem
         {
-            Text = option.UserName,
+            Text = option.Member != null ? option.Member.Name.ToString() : option.UserName,
             Value = option.Id,
             Selected = (Model != null) && (option.Id == Model.SelectedUserId)
         }),
