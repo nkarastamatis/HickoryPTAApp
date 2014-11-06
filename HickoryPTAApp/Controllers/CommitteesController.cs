@@ -17,17 +17,19 @@ namespace HickoryPTAApp.Controllers
     public class CommitteesController : Controller
     {
 		private readonly ICommitteeRepository committeeRepository;
+        private readonly IServerFileRepository serverFileRepository;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
 
 		// If you are using Dependency Injection, you can delete the following constructor
-        public CommitteesController() : this(new CommitteeRepository())
+        public CommitteesController() : this(new CommitteeRepository(), new ServerFileRepository())
         {
         }
 
-        public CommitteesController(ICommitteeRepository committeeRepository)
+        public CommitteesController(ICommitteeRepository committeeRepository, IServerFileRepository serverFileRepository)
         {
 			this.committeeRepository = committeeRepository;
+            this.serverFileRepository = serverFileRepository;
         }
 
         public ApplicationUserManager UserManager
@@ -166,6 +168,17 @@ namespace HickoryPTAApp.Controllers
             AdminConstants.Roles.Administrator)]
         public ActionResult Edit(Committee committee, string Command, HttpPostedFileBase File)
         {
+            if (File != null)
+            {
+                var committeeFile = new CommitteeFile();
+                committeeFile.CommitteeId = committee.CommitteeId;
+                committeeFile.PostedFile = File;
+                serverFileRepository.InsertOrUpdate(committeeFile, CurrentUser);
+                serverFileRepository.Save();
+
+                return Edit(committee.CommitteeId);
+            }
+
             return EditOrCreate(committee, Command);
         }
 
@@ -190,13 +203,13 @@ namespace HickoryPTAApp.Controllers
                     case "Save":
                         return Save(committee);
                     default:
-                        return View();
+                        return View(committee);
                 }
 
             }
             else
             {
-                return View();
+                return View(committee);
             }
         }
 

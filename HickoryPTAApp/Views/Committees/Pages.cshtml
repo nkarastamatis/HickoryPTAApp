@@ -28,6 +28,15 @@
                     </address>
                 </p>
             }
+
+            @if (Model.AttachedFiles != null && Model.AttachedFiles.Any())
+            {
+                <h3>Files</h3>
+                foreach (var file in Model.AttachedFiles)
+                {
+                    <a href="@file.Path.Replace("~", String.Empty)" target="_blank">@file.FileName</a><br />
+                }
+            }
         </div>
         <!--/End Sidebar Content -->
 

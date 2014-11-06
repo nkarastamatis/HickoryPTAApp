@@ -1,0 +1,74 @@
+﻿@model PTAData.Entities.ServerFile
+
+@{
+    ViewBag.Title = "Delete";
+    ViewBag.PreviousUrl = Request.UrlReferrer;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Delete</title>
+</head>
+<body>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <h4>ServerFile</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FileName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FileName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Path)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Path)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModified)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LastModified)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.UserModified)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.UserModified)
+            </dd>
+    
+        </dl>
+    
+        @using (Html.BeginForm()) {
+            @Html.AntiForgeryToken()
+
+            <p>
+                <input class="btn btn-danger" type="submit" value="Delete" /> |
+                <input hidden="hidden" name="PreviousUrl" value="@ViewBag.PreviousUrl" />
+                <a href="@ViewBag.PreviousUrl">Back</a>
+            </p>
+        }
+    </div>
+</body>
+</html>

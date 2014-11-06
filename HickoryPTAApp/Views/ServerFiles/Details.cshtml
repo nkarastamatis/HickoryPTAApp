@@ -1,0 +1,66 @@
+﻿@model PTAData.Entities.ServerFile
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Details</title>
+</head>
+<body>
+    <div>
+        <h4>ServerFile</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.FileName)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.FileName)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.Path)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.Path)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.LastModified)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.LastModified)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.CreatedOn)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.CreatedOn)
+            </dd>
+    
+            <dt>
+                @Html.DisplayNameFor(model => model.UserModified)
+            </dt>
+    
+            <dd>
+                @Html.DisplayFor(model => model.UserModified)
+            </dd>
+    
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.FileId }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
+</body>
+</html>

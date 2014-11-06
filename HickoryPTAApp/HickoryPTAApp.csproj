@@ -197,6 +197,7 @@
     <Compile Include="Controllers\MembershipsController.cs" />
     <Compile Include="Controllers\NavigationController.cs" />
     <Compile Include="Controllers\PostsController.cs" />
+    <Compile Include="Controllers\ServerFilesController.cs" />
     <Compile Include="Extentions\HtmlHelperExtentions.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -221,6 +222,7 @@
     <Compile Include="Models\Repositories\MemberRepository.cs" />
     <Compile Include="Models\Repositories\MembershipRepository.cs" />
     <Compile Include="Models\Repositories\PostRepository.cs" />
+    <Compile Include="Models\Repositories\ServerFileRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -344,6 +346,11 @@
     <Content Include="Views\Shared\DisplayTemplates\CommitteeEvent.cshtml" />
     <Content Include="Views\Posts\Details.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Upload.cshtml" />
+    <Content Include="Views\ServerFiles\Create.cshtml" />
+    <Content Include="Views\ServerFiles\Delete.cshtml" />
+    <Content Include="Views\ServerFiles\Details.cshtml" />
+    <Content Include="Views\ServerFiles\Edit.cshtml" />
+    <Content Include="Views\ServerFiles\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
