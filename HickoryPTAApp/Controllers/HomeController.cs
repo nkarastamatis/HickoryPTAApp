@@ -46,9 +46,23 @@ namespace HickoryPTAApp.Controllers
                     .Where(e => e.EventDate >= DateTime.Today)
                     .Take(10)
                     .ToList());
-            }
+            }            
 
             return PartialView("_EventsPartial", events);
+        }
+
+        [ChildActionOnly]
+        public ActionResult Files()
+        {
+            var files = new List<CommitteeFile>();
+
+            using (var committeeRepo = new HickoryPTAApp.Models.CommitteeRepository())
+            {
+                var globalPtaCommittee = committeeRepo.GlobalPtaCommittee();
+                files.AddRange(globalPtaCommittee.AttachedFiles.ToList());
+            }
+
+            return PartialView("_FilesPartial", files);
         }
     }
 }

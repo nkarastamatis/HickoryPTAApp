@@ -1,0 +1,12 @@
+﻿@model IEnumerable<PTAData.Entities.CommitteeFile>
+
+@if (Model != null && Model.Count() > 0)
+{
+    <h2>Important Documents</h2>
+    <ul>
+        @foreach (var file in Model)
+	    {
+		    <li><a href="@file.Path.Replace("~", String.Empty)">@file.FileName</a></li>
+	    }
+    </ul>
+}

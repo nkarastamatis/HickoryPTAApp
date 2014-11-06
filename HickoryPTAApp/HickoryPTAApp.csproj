@@ -351,6 +351,7 @@
     <Content Include="Views\ServerFiles\Details.cshtml" />
     <Content Include="Views\ServerFiles\Edit.cshtml" />
     <Content Include="Views\ServerFiles\Index.cshtml" />
+    <Content Include="Views\Shared\_FilesPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
