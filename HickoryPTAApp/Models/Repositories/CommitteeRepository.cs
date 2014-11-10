@@ -80,6 +80,9 @@ namespace HickoryPTAApp.Models
 
         private void UpdateLocation(CommitteeEvent evt, string currentUser)
         {
+            if (evt.Location == null)
+                return; 
+
             var location = evt.Location;
             if (string.IsNullOrEmpty(location.Name) &&
                 location.Address != null &&

@@ -29,7 +29,7 @@ namespace HickoryPTAApp.Controllers
         public CommitteesController(ICommitteeRepository committeeRepository, IServerFileRepository serverFileRepository)
         {
 			this.committeeRepository = committeeRepository;
-            this.serverFileRepository = serverFileRepository;
+            this.serverFileRepository = serverFileRepository;            
         }
 
         public ApplicationUserManager UserManager
@@ -96,6 +96,7 @@ namespace HickoryPTAApp.Controllers
 
         public ActionResult Create()
         {
+            HttpContext.Cache.Remove("PossibleChairs");
             return View(new Committee());
         } 
 
@@ -125,6 +126,7 @@ namespace HickoryPTAApp.Controllers
             AdminConstants.Roles.Administrator)]
         public ActionResult Edit(int id)
         {
+            HttpContext.Cache.Remove("PossibleChairs");
             ViewBag.PossibleChairs = PossibleChairs;
 
             var committee = committeeRepository.Find(id);
@@ -176,6 +178,7 @@ namespace HickoryPTAApp.Controllers
                 serverFileRepository.InsertOrUpdate(committeeFile, CurrentUser);
                 serverFileRepository.Save();
 
+                ViewBag.PossibleChairs = PossibleChairs;
                 return Edit(committee.CommitteeId);
             }
 
@@ -215,6 +218,11 @@ namespace HickoryPTAApp.Controllers
 
         private ActionResult Save(Committee committee)
         {
+            // We dont save these via the committee.
+            committee.AttachedFiles = null;
+            committee.Posts = null;
+            committee.Events = null;
+
             committeeRepository.InsertOrUpdate(committee, CurrentUser);
             committeeRepository.Save();
             return RedirectToAction("Index");
@@ -226,8 +234,6 @@ namespace HickoryPTAApp.Controllers
                 committee.Posts = new List<CommitteePost>();
 
             return RedirectToAction("Create", "Posts", new {Type = "CommitteePost", CommitteeId = committee.CommitteeId});
-            committee.Posts.Add(new CommitteePost());
-            return View(committee);
         }
 
         private ActionResult AddCommitteeEvent(Committee committee)
@@ -235,8 +241,6 @@ namespace HickoryPTAApp.Controllers
             if (committee.Events == null)
                 committee.Events = new List<CommitteeEvent>();
             return RedirectToAction("Create", "Posts", new { Type = "CommitteeEvent", CommitteeId = committee.CommitteeId });
-            committee.Events.Add(new CommitteeEvent() { EventDate = DateTime.Now });
-            return View(committee);
         }
 
         private ActionResult AddCommitteeChair(Committee committee)
