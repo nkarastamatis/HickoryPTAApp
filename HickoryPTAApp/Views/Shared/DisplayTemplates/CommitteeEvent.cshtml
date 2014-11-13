@@ -1,8 +1,7 @@
 ﻿@model PTAData.Entities.CommitteeEvent
 
 <fieldset>
-    <legend>@Model.Committee.CommitteeName Event</legend>
-
+    <legend>@Html.ActionLink(Model.Committee.CommitteeName, "Pages", "Committees", new { id = Model.Committee.CommitteeId }, null) Event</legend>
     <h3 class="display-field">@Model.PostTitle</h3>
     @if (Model.Location != null)
     {

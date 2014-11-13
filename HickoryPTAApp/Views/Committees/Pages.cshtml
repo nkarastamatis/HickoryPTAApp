@@ -128,7 +128,17 @@
 
                             <div id="collapse@(post.PostId)" class="panel-collapse collapse in">
                                 <div class="panel-body">
-                                    @post.PostBody
+                                    <p>@post.PostBody</p>
+
+                                    @if (post.Files != null && post.Files.Any())
+                                    {
+                                        <br />
+                                        <div class="display-label">Attachments</div>
+                                        foreach (var file in post.Files)
+                                        {
+                                            <a href="@file.Path.Replace("~", String.Empty)">@file.FileName</a>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>
