@@ -93,6 +93,16 @@
                                     <p>Time: @evnt.EventDate.ToShortTimeString()</p>
 
                                     <p>@evnt.PostBody</p>
+
+                                    @if (evnt.Files != null && evnt.Files.Any())
+                                    {
+                                        <br />
+                                        <div class="display-label">Attachments</div>
+                                        foreach (var file in evnt.Files)
+                                        {
+                                            <a href="@file.Path.Replace("~", String.Empty)">@file.FileName</a>
+                                        }
+                                    }
                                 </div>
                             </div>
                         </div>

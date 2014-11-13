@@ -14,16 +14,18 @@ namespace HickoryPTAApp.Controllers
     public class PostsController : Controller
     {
         private readonly IPostRepository postRepository;
+        private readonly IServerFileRepository serverFileRepository;
 
         // If you are using Dependency Injection, you can delete the following constructor
         public PostsController()
-            : this(new PostRepository())
+            : this(new PostRepository(), new ServerFileRepository())
         {
         }
 
-        public PostsController(IPostRepository postRepository)
+        public PostsController(IPostRepository postRepository, IServerFileRepository serverFileRepository)
         {
             this.postRepository = postRepository;
+            this.serverFileRepository = serverFileRepository;
         }
 
         //
@@ -31,7 +33,7 @@ namespace HickoryPTAApp.Controllers
 
         public ViewResult Index()
         {
-            return View(postRepository.All);
+            return View(postRepository.AllIncluding(p => p.Files));
         }
 
         public string CurrentUser
@@ -57,11 +59,28 @@ namespace HickoryPTAApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Create(CommitteePost post, CommitteeEvent evt)
+        public ActionResult Create(CommitteePost post, CommitteeEvent evt, HttpPostedFileBase File)
         {
+            return CreateOrEdit(post, evt, File);
+            
+        }
+
+        private ActionResult CreateOrEdit(CommitteePost post, CommitteeEvent evt, HttpPostedFileBase File)
+        {
+            if (File != null)
+            {
+                var postFile = new PostFile();
+                postFile.PostId = post.PostId;
+                postFile.PostedFile = File;
+                serverFileRepository.InsertOrUpdate(postFile, CurrentUser);
+                serverFileRepository.Save();
+
+                return Edit(post.PostId);
+            }
+
             if (ModelState.IsValid)
             {
-                if (evt.Location == null)
+                if (evt.Location == null)                    
                     return Save(post);
                 else
                     return Save(evt);
@@ -75,6 +94,7 @@ namespace HickoryPTAApp.Controllers
             }
         }
 
+        
         //
         // GET: /Posts/Details/5
         [AllowAnonymous]
@@ -95,23 +115,16 @@ namespace HickoryPTAApp.Controllers
         // POST: /Posts/Edit/5
 
         [HttpPost]
-        public ActionResult Edit(CommitteePost post, CommitteeEvent evt)
+        public ActionResult Edit(CommitteePost post, CommitteeEvent evt, HttpPostedFileBase File)
         {
-            if (ModelState.IsValid)
-            {
-                if (evt.Location == null)
-                    return Save(post);
-                else
-                    return Save(evt);
-            }
-            else
-            {
-                return View();
-            }
+            return CreateOrEdit(post, evt, File);
         }
 
         private ActionResult Save(Post post)
         {
+            // Files are save on upload. No need to send them in now.
+            post.Files = null;
+
             postRepository.InsertOrUpdate(post, CurrentUser);
             postRepository.Save();
             var committeeId =

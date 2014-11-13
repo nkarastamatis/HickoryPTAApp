@@ -26,5 +26,15 @@
     <br />
     <div class="display-label">Description</div>
     <div class="display-field">@Model.PostBody</div>
+    @if (Model.Files != null && Model.Files.Any())
+    {
+        <br />
+        <div class="display-label">Attachments</div>
+        foreach (var file in Model.Files)
+        {
+            <a href="@file.Path.Replace("~", String.Empty)">@file.FileName</a>
+        }
+    }
+    
 
 </fieldset>

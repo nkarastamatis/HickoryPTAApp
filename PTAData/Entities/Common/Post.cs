@@ -16,7 +16,7 @@ namespace PTAData.Entities
         [DataType(DataType.MultilineText)]
         public string PostBody { get; set; }
 
-        public virtual ICollection<PostFile> Files { get; set; }
+        public virtual IList<PostFile> Files { get; set; }
 
         public DateTime LastModified { get; set; }
 

@@ -3,3 +3,43 @@
 @* This partial view defines form fields that will appear when creating and editing entities *@
 
 @Html.EditorFor(model => model, @Model.GetType().Name)
+
+@{
+    var post = Model as PTAData.Entities.Post;
+    if (post.PostId != 0)
+    {
+<fieldset>
+    <legend>
+        @Html.LabelFor(model => (model as PTAData.Entities.Post).Files, "Attached Files")
+    </legend>
+    @if (post.Files != null && post.Files.Any())
+    {
+        <table class="table">
+            <thead>
+                <tr>
+                    <td>File Name</td>
+                    <td>Actions</td>
+                </tr>
+            </thead>
+            <tbody>
+                @for (int ix = 0; ix < post.Files.Count; ix++)
+                {
+                    var file = post.Files[ix];
+                    <tr>
+                        <td>@file.FileName</td>
+                        <td>
+                            @Html.ActionLink("Delete", "Delete", "ServerFiles", new { id = file.FileId }, null)
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    }
+</fieldset>
+<div class="form-group">
+    <div class="col-md-6">
+        <input type="file" name="File" id="File" class="form-control" onchange="this.form.submit()" />
+    </div>
+</div>
+    }
+    }
