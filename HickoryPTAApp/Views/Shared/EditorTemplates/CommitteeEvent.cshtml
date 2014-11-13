@@ -13,6 +13,7 @@
 
 <div class="form-group">
     <div class="col-sm-12">
+        @Html.HiddenFor(model => model.Location.LocationId)
         @Html.EditorFor(model => model.Location.Name, "Text")
         @Html.EditorFor(model => model.Location.Address.StreetAddress, "Text")
         @Html.EditorFor(model => model.Location.Address.City, "Text")
@@ -33,7 +34,6 @@
 
 @Html.HiddenFor(model => model.PostId)
 @Html.HiddenFor(model => model.CommitteeId)
-@*@Html.HiddenFor(model => model.Location.LocationId)*@
 @Html.HiddenFor(model => model.LastModified.Date)
 @Html.HiddenFor(model => model.UserModified)
 @Html.HiddenFor(model => model.CreatedOn.Date)

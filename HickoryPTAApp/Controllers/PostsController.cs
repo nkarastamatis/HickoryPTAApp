@@ -78,6 +78,9 @@ namespace HickoryPTAApp.Controllers
                 return Edit(post.PostId);
             }
 
+            // Couldn't get the Location.LocationId key to work correctly with the hidden 
+            // field so just remove it from validation. 
+            ModelState.Remove("Location.LocationId");
             if (ModelState.IsValid)
             {
                 if (evt.Location == null)                    
