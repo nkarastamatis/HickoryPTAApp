@@ -1,6 +1,10 @@
 ﻿@model PTAData.Entities.CommitteeEvent
 
 @{
+    if (!Model.EndDate.HasValue)
+    { 
+        Model.EndDate = default(DateTime);
+    }
 }
 <div class="form-group">
     @Html.LabelFor(model => model.PostTitle, "Event Title", new { @class = "col-md-12" })
@@ -10,6 +14,7 @@
 </div>
 
 @Html.EditorFor(model => model.EventDate, "DateTime")
+@Html.EditorFor(model => model.ViewEndDate, "DateTime")
 
 <div class="form-group">
     <div class="col-sm-12">

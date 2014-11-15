@@ -53,7 +53,12 @@ namespace HickoryPTAApp.Controllers
 
             var evt = obj as CommitteeEvent;
             if (evt != null)
-                evt.EventDate = DateTime.Now;
+            {
+                var now = DateTime.Now;
+                var eventDateDefault  = new DateTime(now.Year, now.Month, now.Day, 17, 0, 0);
+                evt.EventDate = eventDateDefault;
+                evt.ViewEndDate = evt.EventDate;
+            }
 
             return View(obj);
         }
@@ -83,10 +88,17 @@ namespace HickoryPTAApp.Controllers
             ModelState.Remove("Location.LocationId");
             if (ModelState.IsValid)
             {
-                if (evt.Location == null)                    
+                if (evt.Location == null)
+                {
                     return Save(post);
+                }
                 else
+                {
+                    if (evt.ViewEndDate > evt.EventDate)
+                        evt.EndDate = evt.ViewEndDate;
+
                     return Save(evt);
+                }
             }
             else
             {
@@ -111,7 +123,15 @@ namespace HickoryPTAApp.Controllers
 
         public ActionResult Edit(int id)
         {
-            return View(postRepository.Find(id));
+            var post = postRepository.Find(id);
+
+            var evt = post as CommitteeEvent;
+            if (evt != null)
+            {
+                evt.ViewEndDate = evt.EndDate.HasValue ? evt.EndDate.Value : evt.EventDate;
+            }
+
+            return View(post);
         }
 
         //

@@ -17,7 +17,7 @@
         {
             <tr>
                 <td>@Html.ActionLink(@evt.PostTitle, "Details", "Posts", new { id = @evt.PostId}, null)</td>
-                <td>@evt.EventDate.ToShortDateString()</td>
+                <td>@evt.DateString()</td>
                 @{ var location = evt.Location != null ? evt.Location.Name : "";}
                 <td>@location</td>
                 <td>@evt.Committee.CommitteeName</td>

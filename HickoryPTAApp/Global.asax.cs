@@ -21,12 +21,12 @@ namespace HickoryPTAApp
             ModelBinders.Binders[typeof(DateTime)] =
                 new PTAData.DateAndTimeModelBinder() { Date = "Date", Time = "Time" };
 
-            var applicationContextConfiguration = new HickoryPTAApp.Migrations.ApplicationDbContextMigrations.Configuration();
-            var migrator = new DbMigrator(applicationContextConfiguration);
+            var hickoryPtaAppContextConfiguration = new HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations.Configuration();
+            var migrator = new DbMigrator(hickoryPtaAppContextConfiguration);
             migrator.Update();
 
-            var hickoryPtaAppContextConfiguration = new HickoryPTAApp.Migrations.HickoryPTAAppContextMigrations.Configuration();
-            migrator = new DbMigrator(hickoryPtaAppContextConfiguration);
+            var applicationContextConfiguration = new HickoryPTAApp.Migrations.ApplicationDbContextMigrations.Configuration();
+            migrator = new DbMigrator(applicationContextConfiguration);
             migrator.Update();
         }
     }

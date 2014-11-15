@@ -58,7 +58,7 @@
                                     <h4 class="panel-title" style="color:white">
 
                                         <span>@evnt.PostTitle</span><br />
-                                        <span>@evnt.EventDate.ToShortDateString()</span>
+                                        <span>@evnt.DateString()</span>
                                     </h4>
                                 </a>
                             </div>
@@ -90,7 +90,11 @@
                                             </p>
                                         }
                                     }
-                                    <p>Time: @evnt.EventDate.ToShortTimeString()</p>
+
+                                    @if (!evnt.DateOnly())
+                                    { 
+                                        <p>Time: @evnt.TimeString()</p>
+                                    }
 
                                     <p>@evnt.PostBody</p>
 

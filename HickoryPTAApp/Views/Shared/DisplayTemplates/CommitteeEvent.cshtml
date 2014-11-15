@@ -18,11 +18,14 @@
     }
     <br />
     <div class="display-label">Date</div>
-    <div class="display-field">@Model.EventDate.ToShortDateString()</div>
+    <div class="display-field">@Model.DateString()</div>
     <br />
-    <div class="display-label">Time</div>
-    <div class="display-field">@Model.EventDate.ToShortTimeString()</div>
-    <br />
+    @if (!Model.DateOnly())
+    { 
+        <div class="display-label">Time</div>
+        <div class="display-field">@Model.TimeString()</div>
+        <br />
+    }
     <div class="display-label">Description</div>
     <div class="display-field">@Model.PostBody</div>
     @if (Model.Files != null && Model.Files.Any())
