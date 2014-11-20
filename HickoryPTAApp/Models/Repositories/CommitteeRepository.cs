@@ -29,7 +29,10 @@ namespace HickoryPTAApp.Models
 
         public Committee Find(int id)
         {
-            var committee = context.Committees.Find(id);            
+            var committee = context.Committees.Find(id);
+            if (committee.ChairPersons != null && committee.ChairPersons.Count > 1)
+                committee.ChairPersons = committee.ChairPersons.OrderBy(c => c.Rank).ToList();
+
             return committee;
         }
 

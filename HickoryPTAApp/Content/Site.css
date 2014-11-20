@@ -22,6 +22,10 @@ select {
     max-width: 280px;
 }
 
+.chairRank {
+    max-width: 60px;
+}
+
 .display-label {
     font-weight: bold
 }

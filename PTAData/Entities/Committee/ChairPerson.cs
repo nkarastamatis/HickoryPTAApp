@@ -18,6 +18,9 @@ namespace PTAData.Entities
         [Column(Order = 2)]
         public int MemberId { get; set; }
 
+        // Lower number goes at top of list.
+        public int Rank { get; set; }
+
         //[ForeignKey("MemberId")]
         public virtual Member Member { get; set; }
         //[ForeignKey("CommitteeId")]
