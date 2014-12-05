@@ -8,7 +8,7 @@ using System.Data.Entity;
 
 namespace HickoryPTAApp.Controllers
 {
-    [RequireHttps]
+    //[RequireHttps]
     public class HomeController : Controller
     {
         public ActionResult Index()
