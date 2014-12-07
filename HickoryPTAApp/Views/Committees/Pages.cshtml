@@ -45,6 +45,8 @@
 
         <!--Edit Main Content Area here-->
         <div class="col-md-9" id="divMain">
+            @if (Model.Events != null && Model.Events.Any())
+            { 
             <br />
             <fieldset>
                 <legend>Events</legend>
@@ -113,7 +115,9 @@
                     }
                 </div>
             </fieldset>
-
+            }
+            @if (Model.Posts != null && Model.Posts.Any())
+            { 
             <br />
             <fieldset>
                 <legend>Posts</legend>
@@ -149,7 +153,7 @@
                     }
                 </div>
             </fieldset>
-
+            }
         </div>
 
         <!--/End Main Content Area here-->
