@@ -39,3 +39,7 @@ select {
 
 .divPanel {padding: 40px;;;;}
 
+.datepicker, 
+.bootstrap-timepicker {
+    background-color: white;
+}

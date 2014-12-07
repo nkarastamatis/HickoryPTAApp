@@ -154,7 +154,7 @@ namespace HickoryPTAApp.Controllers
                 post is CommitteeEvent ?
                 (post as CommitteeEvent).CommitteeId :
                 (post as CommitteePost).CommitteeId;
-            return RedirectToAction("Pages", "Committees", new { id = committeeId });
+            return RedirectToAction("Edit", "Committees", new { id = committeeId });
         }
 
 
