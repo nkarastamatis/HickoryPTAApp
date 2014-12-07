@@ -62,7 +62,31 @@ namespace HickoryPTAApp.Controllers
                 files.AddRange(globalPtaCommittee.AttachedFiles.ToList());
             }
 
-            return PartialView("_FilesPartial", files);
+            return FilesPartialView(files, "Important Documents");
+        }
+
+        [ChildActionOnly]
+        public ActionResult Newsletters()
+        {
+            var files = new List<CommitteeFile>();
+
+            using (var committeeRepo = new HickoryPTAApp.Models.CommitteeRepository())
+            {
+                var globalNewsletterCommittee = committeeRepo.GlobalNewsletterCommittee();
+                if (globalNewsletterCommittee != null)
+                    files.AddRange(globalNewsletterCommittee.AttachedFiles.ToList());
+            }
+
+            return FilesPartialView(files, "Newsletters");
+        }
+
+        private ActionResult FilesPartialView(List<CommitteeFile> files, string title)
+        {
+            var model = new Models.FilesPartialModel();
+            model.Files = files;
+            model.Title = title;
+
+            return PartialView("_FilesPartial", model);
         }
     }
 }

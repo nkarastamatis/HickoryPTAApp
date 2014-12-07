@@ -1,10 +1,10 @@
-﻿@model IEnumerable<PTAData.Entities.CommitteeFile>
+﻿@model HickoryPTAApp.Models.FilesPartialModel
 
-@if (Model != null && Model.Count() > 0)
+@if (Model.Files != null && Model.Files.Count() > 0)
 {
-    <h2>Important Documents</h2>
+    <h2>@Model.Title</h2>
     <ul>
-        @foreach (var file in Model)
+        @foreach (var file in Model.Files)
 	    {
 		    <li><a href="@file.Path.Replace("~", String.Empty)">@file.FileName</a></li>
 	    }

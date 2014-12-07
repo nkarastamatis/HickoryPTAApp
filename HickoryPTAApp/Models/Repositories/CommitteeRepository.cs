@@ -153,6 +153,13 @@ namespace HickoryPTAApp.Models
 
             return globalPtaCommittee;
         }
+
+        internal Committee GlobalNewsletterCommittee()
+        {
+            var globalNewsletterCommittee = All.FirstOrDefault(m => m.CommitteeName.Contains("Newsletter"));            
+
+            return globalNewsletterCommittee;
+        }
     }
 
     public interface ICommitteeRepository : IDisposable
