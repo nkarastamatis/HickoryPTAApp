@@ -25,6 +25,9 @@ namespace HickoryPTAApp
                       "~/Scripts/bootstrap-datepicker.js",
                       "~/Scripts/bootstrap-timepicker.js"));
 
+            bundles.Add(new ScriptBundle("~/bundles/site").Include(
+                      "~/Scripts/site.js"));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/bootstrap/Kickstrap/bootstrap.css",
                       "~/Content/bootstrap/datepicker.css",

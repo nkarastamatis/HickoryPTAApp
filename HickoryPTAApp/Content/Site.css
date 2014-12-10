@@ -43,3 +43,20 @@ select {
 .bootstrap-timepicker {
     background-color: white;
 }
+
+#sponsors-carousel {
+    width: 200px;
+}
+
+.sponsorCarouselImg {
+  height: auto;
+  width: 200px;
+  max-width: 200px;
+}
+
+/*.carousel-inner > .item {
+    -webkit-transition: 5s linear left;
+    -moz-transition: 5s linear left;
+    -o-transition: 5s linear left;
+    transition: 5s linear left;
+}*/
