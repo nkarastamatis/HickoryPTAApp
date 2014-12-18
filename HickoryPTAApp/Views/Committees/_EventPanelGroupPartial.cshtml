@@ -1,0 +1,73 @@
+﻿@model HickoryPTAApp.Models.EventPanelGroupModel
+
+@if (Model.Events != null && Model.Events.Any())
+{
+    <br />
+    <fieldset>
+        <legend>@Model.GroupTitle</legend>
+        <div class="panel-group" id="accordionEvents">
+
+            @foreach (var evnt in Model.Events)
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <a style="color:white" data-toggle="collapse" data-parent="accordionEvents" href="#collapse@(evnt.PostId)">
+                            <h4 class="panel-title" style="color:white">
+
+                                <span>@evnt.PostTitle</span><br />
+                                <span>@evnt.DateString()</span>
+                            </h4>
+                        </a>
+                    </div>
+
+                    <div id="collapse@(evnt.PostId)" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            @{
+                var locationName = evnt.Location != null ? evnt.Location.Name : " ";
+
+                if (evnt.Location != null)
+                {
+                    <p>
+
+                        <address>
+                            <span>Location: <strong>@locationName</strong></span><br />
+                            @if (evnt.Location.Address != null)
+                            {
+                                var address = evnt.Location.Address;
+                                if (!String.IsNullOrEmpty(address.StreetAddress))
+                                {
+                                    <span>@address.StreetAddress</span><br />
+                                }
+                                if (!String.IsNullOrEmpty(address.City))
+                                {
+                                    <span>@address.City, @address.State  @address.Zip</span>
+                                }
+                            }
+                        </address>
+                    </p>
+                }
+                            }
+
+                            @if (!evnt.DateOnly())
+                            {
+                                <p>Time: @evnt.TimeString()</p>
+                            }
+
+                            <p>@evnt.PostBody</p>
+
+                            @if (evnt.Files != null && evnt.Files.Any())
+                            {
+                                <br />
+                                <div class="display-label">Attachments</div>
+                                foreach (var file in evnt.Files)
+                                {
+                                    <a href="@file.Path.Replace("~", String.Empty)">@file.FileName</a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </fieldset>
+}

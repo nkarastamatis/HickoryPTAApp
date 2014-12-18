@@ -24,6 +24,15 @@ namespace PTAData.Entities
 
         public virtual Location Location { get; set; }
 
+        // Date to compare against DateTime.Today
+        public DateTime CompareDate()
+        {
+            if (EndDate.HasValue)
+                return EndDate.Value.Date;
+            else 
+                return EventDate.Date;
+        }
+
         public string DateString()
         {
             string dateString = EventDate.ToString("MMM d");

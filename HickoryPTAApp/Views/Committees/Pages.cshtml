@@ -45,119 +45,34 @@
 
         <!--Edit Main Content Area here-->
         <div class="col-md-9" id="divMain">
-            @if (Model.Events != null && Model.Events.Any())
-            { 
-            <br />
-            <fieldset>
-                <legend>Events</legend>
-                <div class="panel-group" id="accordionEvents">
+            
+                
+                @Html.Partial(
+                    "_EventPanelGroupPartial", 
+                    new HickoryPTAApp.Models.EventPanelGroupModel() 
+                    { 
+                        GroupTitle = "Upcoming Events", 
+                        Events = Model.UpcomingEvents()
+                    })
 
-                    @foreach (var evnt in Model.Events)
+                @Html.Partial(
+                    "_PostPanelGroupPartial",
+                    new HickoryPTAApp.Models.PostPanelGroupModel()
                     {
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <a style="color:white" data-toggle="collapse" data-parent="accordionEvents" href="#collapse@(evnt.PostId)">
-                                    <h4 class="panel-title" style="color:white">
+                        GroupTitle = "Posts",
+                        Posts = Model.Posts
+                    })
 
-                                        <span>@evnt.PostTitle</span><br />
-                                        <span>@evnt.DateString()</span>
-                                    </h4>
-                                </a>
-                            </div>
-
-                            <div id="collapse@(evnt.PostId)" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    @{
-                                        var locationName = evnt.Location != null ? evnt.Location.Name : " ";
-
-                                        if (evnt.Location != null)
-                                        {
-                                            <p>
-
-                                            <address>
-                                                <span>Location: <strong>@locationName</strong></span><br />
-                                                @if (evnt.Location.Address != null)
-                                                {
-                                                    var address = evnt.Location.Address;
-                                                    if (!String.IsNullOrEmpty(address.StreetAddress))
-                                                    {
-                                                        <span>@address.StreetAddress</span><br />
-                                                    }
-                                                    if (!String.IsNullOrEmpty(address.City))
-                                                    {
-                                                        <span>@address.City, @address.State  @address.Zip</span>                                                                                                            
-                                                    }
-                                                }
-                                            </address>
-                                            </p>
-                                        }
-                                    }
-
-                                    @if (!evnt.DateOnly())
-                                    { 
-                                        <p>Time: @evnt.TimeString()</p>
-                                    }
-
-                                    <p>@evnt.PostBody</p>
-
-                                    @if (evnt.Files != null && evnt.Files.Any())
-                                    {
-                                        <br />
-                                        <div class="display-label">Attachments</div>
-                                        foreach (var file in evnt.Files)
-                                        {
-                                            <a href="@file.Path.Replace("~", String.Empty)">@file.FileName</a>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </fieldset>
-            }
-            @if (Model.Posts != null && Model.Posts.Any())
-            { 
-            <br />
-            <fieldset>
-                <legend>Posts</legend>
-                <div class="panel-group" id="accordionPosts">
-
-                    @foreach (var post in Model.Posts)
+                @Html.Partial(
+                    "_EventPanelGroupPartial",
+                    new HickoryPTAApp.Models.EventPanelGroupModel()
                     {
-                        <div class="panel panel-primary">
-                            <div class="panel-heading">
-                                <a style="color:white" data-toggle="collapse" data-parent="accordionPosts" href="#collapse@(post.PostId)">
-                                    <h4 style="color:white" class="panel-title">
-                                        @post.PostTitle
-                                    </h4>
-                                </a>
-                            </div>
-
-                            <div id="collapse@(post.PostId)" class="panel-collapse collapse in">
-                                <div class="panel-body">
-                                    <p>@post.PostBody</p>
-
-                                    @if (post.Files != null && post.Files.Any())
-                                    {
-                                        <br />
-                                        <div class="display-label">Attachments</div>
-                                        foreach (var file in post.Files)
-                                        {
-                                            <a href="@file.Path.Replace("~", String.Empty)">@file.FileName</a>
-                                        }
-                                    }
-                                </div>
-                            </div>
-                        </div>
-                    }
-                </div>
-            </fieldset>
-            }
+                        GroupTitle = "Past Events",
+                        Events = Model.PastEvents()
+                    })            
+            
         </div>
-
         <!--/End Main Content Area here-->
-
 
     </div>
 

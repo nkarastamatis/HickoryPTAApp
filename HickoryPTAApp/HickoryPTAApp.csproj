@@ -224,6 +224,7 @@
     <Compile Include="Models\AdminViewModels.cs" />
     <Compile Include="Models\FilesPartialModel.cs" />
     <Compile Include="Models\NavigationViewModels.cs" />
+    <Compile Include="Models\PanelGroupModels.cs" />
     <Compile Include="Models\Repositories\BaseRepository.cs" />
     <Compile Include="Models\Repositories\CommitteeRepository.cs" />
     <Compile Include="Models\HickoryPTAAppContext.cs" />
@@ -363,6 +364,8 @@
     <Content Include="Views\ServerFiles\Index.cshtml" />
     <Content Include="Views\Shared\_FilesPartial.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\CommitteePost.cshtml" />
+    <Content Include="Views\Committees\_EventPanelGroupPartial.cshtml" />
+    <Content Include="Views\Committees\_PostPanelGroupPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

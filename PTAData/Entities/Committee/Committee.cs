@@ -78,6 +78,16 @@ namespace PTAData.Entities
             }
         }
 
+        public IList<CommitteeEvent> UpcomingEvents()
+        {
+            return Events.Where(e => e.CompareDate() >= DateTime.Today).ToList();
+        }
+
+        public IList<CommitteeEvent> PastEvents()
+        {
+            return Events.Where(e => e.CompareDate() < DateTime.Today).ToList();
+        }
+
         public DateTime LastModified { get; set; }
 
         public DateTime CreatedOn { get; set; }

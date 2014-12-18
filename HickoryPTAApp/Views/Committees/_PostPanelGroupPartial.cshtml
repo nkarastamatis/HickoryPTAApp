@@ -1,0 +1,40 @@
+﻿@model HickoryPTAApp.Models.PostPanelGroupModel
+
+@if (Model.Posts != null && Model.Posts.Any())
+{
+    <br />
+    <fieldset>
+        <legend>@Model.GroupTitle</legend>
+        <div class="panel-group" id="accordionPosts">
+
+            @foreach (var post in Model.Posts)
+            {
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <a style="color:white" data-toggle="collapse" data-parent="accordionPosts" href="#collapse@(post.PostId)">
+                            <h4 style="color:white" class="panel-title">
+                                @post.PostTitle
+                            </h4>
+                        </a>
+                    </div>
+
+                    <div id="collapse@(post.PostId)" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <p>@post.PostBody</p>
+
+                            @if (post.Files != null && post.Files.Any())
+                            {
+                                <br />
+                                <div class="display-label">Attachments</div>
+                                foreach (var file in post.Files)
+                                {
+                                    <a href="@file.Path.Replace("~", String.Empty)">@file.FileName</a>
+                                }
+                            }
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </fieldset>
+}
