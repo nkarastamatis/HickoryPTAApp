@@ -43,3 +43,20 @@ select {
 .bootstrap-timepicker {
     background-color: white;
 }
+
+@media screen and (max-width: 991px) and (min-width: 769px){
+    .columns{
+        height: 300px;
+        overflow:scroll;
+        overflow-x: hidden;
+    }
+}
+
+@media screen and (min-width: 992px){
+    .columns{
+        -moz-column-count:2; /* Firefox */
+        -webkit-column-count:2; /* Safari and Chrome */
+        column-count:2;
+        width: auto;
+    }
+}
