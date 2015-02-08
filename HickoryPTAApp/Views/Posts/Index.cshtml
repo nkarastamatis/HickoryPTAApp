@@ -9,7 +9,7 @@
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
-<table>
+<table class ="table table-condensed">
     <tr>
         <th></th>
         <th>
@@ -29,30 +29,31 @@
         </th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.PostId }) |
-            @Html.ActionLink("Details", "Details", new { id = item.PostId }) |
-            @Html.ActionLink("Delete", "Delete", new { id = item.PostId })
-        </td>
-        <td>
-			@item.PostTitle
-        </td>
-        <td>
-			@(item.Files == null ? "None" : item.Files.Count.ToString())
-        </td>
-        <td>
-			@String.Format("{0:g}", item.LastModified)
-        </td>
-        <td>
-			@String.Format("{0:g}", item.CreatedOn)
-        </td>
-        <td>
-			@item.UserModified
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.PostId }) |
+                @Html.ActionLink("Details", "Details", new { id = item.PostId }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.PostId })
+            </td>
+            <td>
+                @item.PostTitle
+            </td>
+            <td>
+                @(item.Files == null ? "None" : item.Files.Count.ToString())
+            </td>
+            <td>
+                @String.Format("{0:g}", item.LastModified)
+            </td>
+            <td>
+                @String.Format("{0:g}", item.CreatedOn)
+            </td>
+            <td>
+                @item.UserModified
+            </td>
+        </tr>
+    }
 
 </table>
 

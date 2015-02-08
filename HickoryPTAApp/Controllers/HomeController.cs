@@ -88,5 +88,25 @@ namespace HickoryPTAApp.Controllers
 
             return PartialView("_FilesPartial", model);
         }
+
+        [ChildActionOnly]
+        public ActionResult BreakingNews()
+        {
+            var posts = new List<CommitteePost>();
+            var breakingNewsCutoffDate = DateTime.Today.AddDays(-10);
+            using (var context = new HickoryPTAApp.Models.HickoryPTAAppContext())
+            {
+                IQueryable<CommitteePost> query = context.CommitteePosts;
+                posts.AddRange(
+                    query
+                    .Include(p => p.Committee)
+                    .Include(p => p.Files)
+                    .Where(p => p.LastModified >= breakingNewsCutoffDate)
+                    .OrderByDescending(p => p.LastModified)
+                    .ToList());
+            }
+
+            return PartialView("_BreakingNewsPartial", posts);
+        }
     }
 }

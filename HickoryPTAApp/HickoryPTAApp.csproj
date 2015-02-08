@@ -366,6 +366,7 @@
     <Content Include="Views\Shared\DisplayTemplates\CommitteePost.cshtml" />
     <Content Include="Views\Committees\_EventPanelGroupPartial.cshtml" />
     <Content Include="Views\Committees\_PostPanelGroupPartial.cshtml" />
+    <Content Include="Views\Shared\_BreakingNewsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
