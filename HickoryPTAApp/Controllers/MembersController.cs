@@ -182,6 +182,30 @@ namespace HickoryPTAApp.Controllers
             return RedirectToAction("Index");
         }
 
+        public ActionResult ResetPassword(int id)
+        {
+
+            var user = memberRepository.Find(id);
+            var appuser = UserManager.FindByEmail(user.Email);
+
+            var userFactors = UserManager.TwoFactorProviders;// GetValidTwoFactorProviders(appuser.Id);
+            //var factorOptions = userFactors.Select(purpose => new SelectListItem { Text = purpose, Value = purpose }).ToList();
+            
+            var signInManager = HttpContext.GetOwinContext().Get<ApplicationSignInManager>();
+            //signInManager.SendTwoFactorCode(userFactors.FirstOrDefault().Key);
+
+
+            //var code = UserManager.GenerateTwoFactorToken(appuser.Id, userFactors.FirstOrDefault().Key);
+            var token = UserManager.GeneratePasswordResetToken(appuser.Id);
+            var result = UserManager.ResetPassword(appuser.Id, token, "Hickory1");
+            if (result.Succeeded)
+            {
+                return RedirectToAction("Index");
+            }
+
+            return RedirectToAction("Index");
+        }
+
         protected override void Dispose(bool disposing)
         {
             if (disposing) {

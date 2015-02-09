@@ -31,7 +31,8 @@
         <td>
             @Html.ActionLink("Edit", "Edit", new { id=item.MemberId }) |
             @Html.ActionLink("Details", "Details", new { id=item.MemberId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.MemberId })
+            @Html.ActionLink("Delete", "Delete", new { id=item.MemberId }) |
+            @Html.ActionLink("Reset Pwd", "ResetPassword", new { id = item.MemberId })
         </td>
         <td>
 			@Html.DisplayTextFor(_ => item.Name).ToString()
