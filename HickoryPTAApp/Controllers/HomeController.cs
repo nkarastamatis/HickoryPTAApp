@@ -62,7 +62,7 @@ namespace HickoryPTAApp.Controllers
                 files.AddRange(globalPtaCommittee.AttachedFiles.ToList());
             }
 
-            return FilesPartialView(files, "Important Documents");
+            return FilesPartialView(files.ToList<ServerFile>(), "Important Documents");
         }
 
         [ChildActionOnly]
@@ -77,10 +77,29 @@ namespace HickoryPTAApp.Controllers
                     files.AddRange(globalNewsletterCommittee.AttachedFiles.ToList());
             }
 
-            return FilesPartialView(files, "Newsletters");
+            return FilesPartialView(files.ToList<ServerFile>(), "Newsletters");
         }
 
-        private ActionResult FilesPartialView(List<CommitteeFile> files, string title)
+        [ChildActionOnly]
+        public ActionResult RecentUploads()
+        {
+            var files = new List<ServerFile>();
+            var recentUploadsCutoffDate = DateTime.Today.AddDays(-30);
+            using (var context = new HickoryPTAApp.Models.HickoryPTAAppContext())
+            {
+                IQueryable<ServerFile> query = context.ServerFiles;
+                files.AddRange(
+                    query
+                    .Where(p => p.LastModified >= recentUploadsCutoffDate)
+                    .OrderByDescending(p => p.LastModified)
+                    .Take(20)
+                    .ToList());
+            }
+
+            return FilesPartialView(files, "New Files");
+        }
+
+        private ActionResult FilesPartialView(List<ServerFile> files, string title)
         {
             var model = new Models.FilesPartialModel();
             model.Files = files;

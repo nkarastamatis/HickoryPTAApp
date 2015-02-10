@@ -8,6 +8,6 @@ namespace HickoryPTAApp.Models
     public class FilesPartialModel
     {
         public string Title { get; set; }
-        public IEnumerable<PTAData.Entities.CommitteeFile> Files { get; set; }
+        public IEnumerable<PTAData.Entities.ServerFile> Files { get; set; }
     }
 }
