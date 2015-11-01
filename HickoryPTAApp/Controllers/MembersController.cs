@@ -176,6 +176,9 @@ namespace HickoryPTAApp.Controllers
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
+            var user = UserManager.Users.FirstOrDefault(u => u.MemberId == id);
+            if (user != null)
+                UserManager.Delete(user);
             memberRepository.Delete(id);
             memberRepository.Save();
 

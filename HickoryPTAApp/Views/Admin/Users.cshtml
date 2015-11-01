@@ -15,7 +15,7 @@
 <h2>@ViewBag.Title</h2>
 
 @using (Html.BeginForm())
-{ 
+{
     <br />
     <h3>Modify User Roles</h3>
     <div class="form-group">
@@ -26,15 +26,16 @@
             Selected = (Model != null) && (option.Id == Model.SelectedUserId)
         }),
         "Choose...",
-        new { @class = "form-control", id="userDropDownList", onchange = "this.form.submit()"})
+        new { @class = "form-control", id = "userDropDownList", onchange = "this.form.submit()" })
     </div>
+    var user = GetUser(Model.SelectedUserId);
     foreach (var role in Model.Roles)
     {
         <div class="checkbox form-group" style="margin-left:25px">
             <input type="checkbox"
                    name="SelectedRoles"
                    value="@role.Name" id="@role.Id"
-                   @{  var user = GetUser(Model.SelectedUserId); if (user != null && user.Roles.Any(item => item.RoleId == role.Id)) {  <text> checked='checked' </text>   }   } />
+                   @{ if (user != null && user.Roles.Any(item => item.RoleId == role.Id)) {  <text> checked='checked' </text>   }   } />
             <label for="@role.Id">@role.Name</label>
         </div>
     }
@@ -47,10 +48,10 @@
     <table class="table">
             <tr>
                 <th>
-                    Username
+                    Name
                 </th>
                 <th>
-                    Email
+                    Username
                 </th>
                 <th>
                     Roles
@@ -63,10 +64,11 @@
     {
             <tr>
                 <td>
-                    @Html.DisplayFor(modelItem => item.UserName)
+                    @Html.DisplayFor(modelItem => item.Member.Name.First)
+                    @Html.DisplayFor(modelItem => item.Member.Name.Last)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.Email)
+                    @Html.DisplayFor(modelItem => item.UserName)
                 </td>
                 <td>
                     @{

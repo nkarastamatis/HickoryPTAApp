@@ -15,6 +15,7 @@ namespace HickoryPTAApp.Controllers
     [Authorize(Roles = AdminConstants.Roles.Administrator)]
     public class AdminController : Controller
     {
+        private ICommitteeRepository _committeeRepository;
         private ApplicationUserManager _userManager;
         private ApplicationRoleManager _roleManager;
 
@@ -48,6 +49,21 @@ namespace HickoryPTAApp.Controllers
             private set
             {
                 _roleManager = value;
+            }
+        }
+
+        public ICommitteeRepository CommitteeRepository
+        {
+            get
+            {
+                if (_committeeRepository == null)
+                    _committeeRepository = new CommitteeRepository();
+                return _committeeRepository;
+            }
+
+            set
+            {
+                _committeeRepository = value;
             }
         }
 
@@ -110,6 +126,12 @@ namespace HickoryPTAApp.Controllers
                     else if (UserManager.IsInRole(model.SelectedUserId, role.Name))
                     {
                         UserManager.RemoveFromRole(model.SelectedUserId, role.Name);
+                        if (role.Name == AdminConstants.Roles.CommitteeChair)
+                        {
+                            var user = model.Users.First(u => u.Id == model.SelectedUserId);
+                            CommitteeRepository.RemoveMemberFromCommittes(user.Member);
+                            CommitteeRepository.Save();
+                        }
                     }
                 }
             }
@@ -128,7 +150,9 @@ namespace HickoryPTAApp.Controllers
         {
             model.Users = UserManager.Users
                 .Include(u => u.Roles)
-                .Include(u => u.Member);
+                .Include(u => u.Member)
+                .OrderBy(u => u.Member.Name.First)
+                .ToList();
             model.Roles = RoleManager.Roles.ToList();
         }
 

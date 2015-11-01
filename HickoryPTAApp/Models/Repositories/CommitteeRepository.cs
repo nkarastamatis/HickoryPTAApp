@@ -81,6 +81,17 @@ namespace HickoryPTAApp.Models
             }
         }
 
+        public void RemoveChairPerson(ChairPerson chair)
+        {
+            context.Entry(chair).State = System.Data.Entity.EntityState.Deleted;
+        }
+
+        public void RemoveMemberFromCommittes(Member member)
+        {
+            var chairs = context.CommitteeChairs.Where(c => c.Member.MemberId == member.MemberId);
+            chairs.ForEachAsync(RemoveChairPerson).Wait();
+        }
+
         private void UpdateLocation(CommitteeEvent evt, string currentUser)
         {
             if (evt.Location == null)
@@ -170,5 +181,8 @@ namespace HickoryPTAApp.Models
         void InsertOrUpdate(Committee committee, string currentUser);
         void Delete(int id);
         void Save();
+
+        void RemoveChairPerson(ChairPerson chair);
+        void RemoveMemberFromCommittes(Member member);
     }
 }

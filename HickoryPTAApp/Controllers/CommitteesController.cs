@@ -127,10 +127,38 @@ namespace HickoryPTAApp.Controllers
         public ActionResult Edit(int id)
         {
             HttpContext.Cache.Remove("PossibleChairs");
-            ViewBag.PossibleChairs = PossibleChairs;
+            var possibleChairs = PossibleChairs;
+            ViewBag.PossibleChairs = ViewBagPossibleChairs(possibleChairs);
 
             var committee = committeeRepository.Find(id);
+
+            CleanupCommitteeChairs(committee, possibleChairs);
+
             return View(committee);
+        }
+
+        /// <summary>
+        /// This is done because the Admin controller did not always remove chairs from 
+        /// committee when removing the chair role from a user. We may not need to 
+        /// do it anymore but why not. 
+        /// </summary>
+        /// <param name="committee"></param>
+        /// <param name="possibleChairs"></param>
+        private void CleanupCommitteeChairs(Committee committee, List<ApplicationUser> possibleChairs)
+        {
+            var chairsToRemove = committee.ChairPersons
+                .Where(chair => !possibleChairs.Any(p => p.MemberId == chair.MemberId))
+                .ToList();
+
+            if (chairsToRemove.Any())
+            {
+                chairsToRemove.ForEach(c =>
+                {
+                    committee.ChairPersons.Remove(c);
+                    committeeRepository.RemoveChairPerson(c);
+                });
+                committeeRepository.Save();
+            }
         }
 
         private void RemovedCallback(string key, object value, CacheItemRemovedReason reason)
@@ -138,25 +166,35 @@ namespace HickoryPTAApp.Controllers
             
         }
 
-        private object PossibleChairs
+        private object ViewBagPossibleChairs(List<ApplicationUser> possibleChairs)
+        {
+
+            var cache = new System.Web.Caching.Cache();
+            var viewBagPossibleChairs = HttpContext.Cache.Get("PossibleChairs");
+            if (viewBagPossibleChairs == null)
+            {
+                viewBagPossibleChairs = possibleChairs;
+                HttpContext.Cache.Insert("PossibleChairs", viewBagPossibleChairs);
+            }
+
+            return viewBagPossibleChairs;
+
+        }
+
+        private List<ApplicationUser> PossibleChairs
         {
             get
             {
-                var cache = new System.Web.Caching.Cache();
-                var possibleChairs = HttpContext.Cache.Get("PossibleChairs");
-                if (possibleChairs == null)
-                {
-                    var userIds =
+                var userIds =
                         RoleManager
                         .FindByName(AdminConstants.Roles.CommitteeChair)
                         .Users
                         .Select(u => u.UserId)
                         .ToList();
-                    possibleChairs = UserManager.Users.Where(u => userIds.Contains(u.Id)).ToList();
-                    HttpContext.Cache.Insert("PossibleChairs", possibleChairs);
-                }
-
-                return possibleChairs;
+                return UserManager.Users
+                    .Where(u => userIds.Contains(u.Id))
+                    .OrderBy(u => u.Member.Name.First)
+                    .ToList();
             }
         }
 
@@ -178,7 +216,7 @@ namespace HickoryPTAApp.Controllers
                 serverFileRepository.InsertOrUpdate(committeeFile, CurrentUser);
                 serverFileRepository.Save();
 
-                ViewBag.PossibleChairs = PossibleChairs;
+                ViewBag.PossibleChairs = ViewBagPossibleChairs(PossibleChairs);
                 return Edit(committee.CommitteeId);
             }
 
@@ -187,7 +225,7 @@ namespace HickoryPTAApp.Controllers
 
         private ActionResult EditOrCreate(Committee committee, string Command)
         {
-            ViewBag.PossibleChairs = PossibleChairs;
+            ViewBag.PossibleChairs = ViewBagPossibleChairs(PossibleChairs);
 
             switch (Command)
             {
